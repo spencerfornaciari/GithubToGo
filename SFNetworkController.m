@@ -34,8 +34,6 @@
     NSDictionary *searchDictionary = [NSJSONSerialization JSONObjectWithData:searchData options:NSJSONReadingMutableContainers error:&error];
     
     return searchDictionary[@"items"];
-    
-    
 }
 
 @end

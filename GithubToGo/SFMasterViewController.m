@@ -16,6 +16,7 @@
 }
 
 @property (nonatomic) NSMutableArray *searchResults;
+@property (strong, nonatomic) IBOutlet UISearchBar *githubSearchBar;
 
 @end
 
@@ -34,11 +35,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    self.githubSearchBar.delegate = self;
+
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
     self.detailViewController = (SFDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     
-    self.searchResults = [[SFNetworkController sharedController] reposForSearchString:@"iOS"];
+    self.searchResults = (NSMutableArray *)[[SFNetworkController sharedController] reposForSearchString:@"iOS"];
     
 }
 
@@ -103,6 +107,26 @@
         NSDictionary *repoDict = _searchResults[indexPath.row];
         [[segue destinationViewController] setDetailItem:repoDict];
     }
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    searchBar.keyboardType = UIKeyboardTypeWebSearch;
+    
+    [searchBar resignFirstResponder];
+    [self githubSearch:searchBar.text];
+}
+
+- (void)githubSearch:(NSString *)string
+{
+    NSLog(@"%@", string);
+    self.searchResults = (NSMutableArray *)[[SFNetworkController sharedController] reposForSearchString:string];
+    if (self.searchResults == nil) {
+        
+    } else {
+        [self.tableView reloadData];
+    }
+    
 }
 
 @end

@@ -14,6 +14,7 @@
 
 @property (nonatomic) NSMutableArray *searchResults;
 @property (nonatomic) SFDetailViewController *detailViewController;
+@property (strong, nonatomic) IBOutlet UISearchBar *githubSearchBar;
 
 @end
 
@@ -32,23 +33,24 @@
 {
     [super viewDidLoad];
     
-    self.searchResults = [[SFNetworkController sharedController] reposForSearchString:@"iOS"];
+    self.githubSearchBar.delegate = self;
+    
+    self.searchResults = (NSMutableArray *)[[SFNetworkController sharedController] reposForSearchString:@"iOS"];
 
     self.detailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubWebViewController"];
     
     [self addChildViewController:self.detailViewController];
     self.detailViewController.view.frame = CGRectMake(self.view.frame.size.width * .8, self.detailViewController.view.frame.origin.y, self.detailViewController.view.frame.size.width, self.detailViewController.view.frame.size.height);
- //= self.view.frame;
     [self.view addSubview:self.detailViewController.view];
     [self.detailViewController didMoveToParentViewController:self];
     
     [self setupPanGesture];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    //self.searchResults = (NSMutableArray *)[[SFNetworkController sharedController] reposForSearchString:self.githubSearchBar.text];
+    NSLog(@"%@", self.githubSearchBar.text);
 }
 
 - (void)didReceiveMemoryWarning
@@ -83,7 +85,6 @@
             
             self.detailViewController.view.center = CGPointMake(self.detailViewController.view.center.x +translation.x, self.detailViewController.view.center.y);
         
-            
             [(UIPanGestureRecognizer *)sender setTranslation:CGPointMake(0,0) inView:self.view];
         }
         
@@ -94,16 +95,10 @@
         if (self.detailViewController.view.frame.origin.x > self.view.frame.size.width / 2)
         {
             [self openMenu];
-            
-            
         }
         if (self.detailViewController.view.frame.origin.x < self.view.frame.size.width / 2 )
         {
-            [UIView animateWithDuration:.4 animations:^{
-                self.detailViewController.view.frame = self.view.frame;
-            } completion:^(BOOL finished) {
-                [self closeMenu];
-            }];
+            [self closeMenu];
         }
     }
     
@@ -111,10 +106,7 @@
 
 - (void)openMenu
 {
-    NSLog(@" open menu");
-    
-    [UIView animateWithDuration:1 animations:^{
-        
+    [UIView animateWithDuration:.4 animations:^{
         self.detailViewController.view.frame = CGRectMake(self.view.frame.size.width * .8, self.detailViewController.view.frame.origin.y, self.detailViewController.view.frame.size.width, self.detailViewController.view.frame.size.height);
     } completion:^(BOOL finished) {
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(slideBack:)];
@@ -122,10 +114,9 @@
     }];
 }
 
-
 - (void)closeMenu
 {
-    [UIView animateWithDuration:0.2 animations:
+    [UIView animateWithDuration:.4 animations:
      ^{
         self.detailViewController.view.frame = CGRectMake(self.detailViewController.view.frame.origin.x + 20.f, self.detailViewController.view.frame.origin.y, self.detailViewController.view.frame.size.width, self.detailViewController.view.frame.size.height);
     } completion:^(BOOL finished) {
@@ -224,6 +215,27 @@
     NSDictionary *repoDict = _searchResults[indexPath.row];
     self.detailViewController.detailItem = repoDict;
     [self closeMenu];
+    
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    searchBar.keyboardType = UIKeyboardTypeWebSearch;
+    
+    [searchBar resignFirstResponder];
+    [self githubSearch:searchBar.text];
+}
+
+- (void)githubSearch:(NSString *)string
+{
+    NSLog(@"%@", string);
+    self.searchResults = (NSMutableArray *)[[SFNetworkController sharedController] reposForSearchString:string];
+    if (self.searchResults == nil) {
+        
+    } else {
+        [self.tableView reloadData];
+    }
+    
 }
 
 @end
