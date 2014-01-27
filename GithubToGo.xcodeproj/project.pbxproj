@@ -23,6 +23,7 @@
 		8934E7E71896CFD200854DC8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8934E7C31896CFD200854DC8 /* UIKit.framework */; };
 		8934E7EF1896CFD200854DC8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8934E7ED1896CFD200854DC8 /* InfoPlist.strings */; };
 		8934E7F11896CFD200854DC8 /* GithubToGoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8934E7F01896CFD200854DC8 /* GithubToGoTests.m */; };
+		8934E7FC1896D30400854DC8 /* SFNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8934E7FB1896D30400854DC8 /* SFNetworkController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		8934E7EC1896CFD200854DC8 /* GithubToGoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GithubToGoTests-Info.plist"; sourceTree = "<group>"; };
 		8934E7EE1896CFD200854DC8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8934E7F01896CFD200854DC8 /* GithubToGoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GithubToGoTests.m; sourceTree = "<group>"; };
+		8934E7FA1896D30400854DC8 /* SFNetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFNetworkController.h; path = ../SFNetworkController.h; sourceTree = "<group>"; };
+		8934E7FB1896D30400854DC8 /* SFNetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFNetworkController.m; path = ../SFNetworkController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +120,8 @@
 		8934E7C51896CFD200854DC8 /* GithubToGo */ = {
 			isa = PBXGroup;
 			children = (
+				8934E7FA1896D30400854DC8 /* SFNetworkController.h */,
+				8934E7FB1896D30400854DC8 /* SFNetworkController.m */,
 				8934E7CE1896CFD200854DC8 /* SFAppDelegate.h */,
 				8934E7CF1896CFD200854DC8 /* SFAppDelegate.m */,
 				8934E7D11896CFD200854DC8 /* Main_iPhone.storyboard */,
@@ -260,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8934E7D91896CFD200854DC8 /* SFMasterViewController.m in Sources */,
+				8934E7FC1896D30400854DC8 /* SFNetworkController.m in Sources */,
 				8934E7CC1896CFD200854DC8 /* main.m in Sources */,
 				8934E7DC1896CFD200854DC8 /* SFDetailViewController.m in Sources */,
 				8934E7D01896CFD200854DC8 /* SFAppDelegate.m in Sources */,
