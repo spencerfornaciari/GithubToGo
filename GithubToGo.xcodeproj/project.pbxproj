@@ -24,6 +24,7 @@
 		8934E7EF1896CFD200854DC8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8934E7ED1896CFD200854DC8 /* InfoPlist.strings */; };
 		8934E7F11896CFD200854DC8 /* GithubToGoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8934E7F01896CFD200854DC8 /* GithubToGoTests.m */; };
 		8934E7FC1896D30400854DC8 /* SFNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8934E7FB1896D30400854DC8 /* SFNetworkController.m */; };
+		8934E7FF1896FD4100854DC8 /* SFIphoneTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8934E7FE1896FD4100854DC8 /* SFIphoneTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,8 @@
 		8934E7F01896CFD200854DC8 /* GithubToGoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GithubToGoTests.m; sourceTree = "<group>"; };
 		8934E7FA1896D30400854DC8 /* SFNetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFNetworkController.h; path = ../SFNetworkController.h; sourceTree = "<group>"; };
 		8934E7FB1896D30400854DC8 /* SFNetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFNetworkController.m; path = ../SFNetworkController.m; sourceTree = "<group>"; };
+		8934E7FD1896FD4100854DC8 /* SFIphoneTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFIphoneTableViewController.h; path = ../SFIphoneTableViewController.h; sourceTree = "<group>"; };
+		8934E7FE1896FD4100854DC8 /* SFIphoneTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFIphoneTableViewController.m; path = ../SFIphoneTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +123,8 @@
 		8934E7C51896CFD200854DC8 /* GithubToGo */ = {
 			isa = PBXGroup;
 			children = (
+				8934E7FD1896FD4100854DC8 /* SFIphoneTableViewController.h */,
+				8934E7FE1896FD4100854DC8 /* SFIphoneTableViewController.m */,
 				8934E7FA1896D30400854DC8 /* SFNetworkController.h */,
 				8934E7FB1896D30400854DC8 /* SFNetworkController.m */,
 				8934E7CE1896CFD200854DC8 /* SFAppDelegate.h */,
@@ -269,6 +274,7 @@
 				8934E7CC1896CFD200854DC8 /* main.m in Sources */,
 				8934E7DC1896CFD200854DC8 /* SFDetailViewController.m in Sources */,
 				8934E7D01896CFD200854DC8 /* SFAppDelegate.m in Sources */,
+				8934E7FF1896FD4100854DC8 /* SFIphoneTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -66,8 +66,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
     //NSDate *object = _objects[indexPath.row];
-    NSDictionary *dictionary = [self.searchResults objectAtIndex:indexPath.row];
-    cell.textLabel.text = [dictionary objectForKey:@"name"]; //[self.searchResults[indexPath.row] objectForKey:@"name"];
+    cell.textLabel.text = [self.searchResults[indexPath.row] objectForKey:@"name"];
     return cell;
 }
 
