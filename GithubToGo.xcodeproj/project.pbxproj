@@ -29,6 +29,8 @@
 		89EA254518985A51006ADEB6 /* SFUserCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89EA254418985A51006ADEB6 /* SFUserCollectionController.m */; };
 		89EA254C1898635F006ADEB6 /* Cheeseburger@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89EA254A1898635F006ADEB6 /* Cheeseburger@2x.png */; };
 		89EA254F18986377006ADEB6 /* Cheeseburger.png in Resources */ = {isa = PBXBuildFile; fileRef = 89EA254E18986377006ADEB6 /* Cheeseburger.png */; };
+		89EA25561898694D006ADEB6 /* SFUserCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 89EA25551898694D006ADEB6 /* SFUserCollectionCell.m */; };
+		89EA255918986B47006ADEB6 /* GitUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 89EA255818986B47006ADEB6 /* GitUser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,26 +56,30 @@
 		8934E7CF1896CFD200854DC8 /* SFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFAppDelegate.m; sourceTree = "<group>"; };
 		8934E7D21896CFD200854DC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		8934E7D51896CFD200854DC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		8934E7D71896CFD200854DC8 /* SFMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFMasterViewController.h; sourceTree = "<group>"; };
-		8934E7D81896CFD200854DC8 /* SFMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFMasterViewController.m; sourceTree = "<group>"; };
-		8934E7DA1896CFD200854DC8 /* SFDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFDetailViewController.h; sourceTree = "<group>"; };
-		8934E7DB1896CFD200854DC8 /* SFDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFDetailViewController.m; sourceTree = "<group>"; };
+		8934E7D71896CFD200854DC8 /* SFMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SFMasterViewController.h; path = GithubToGo/SFMasterViewController.h; sourceTree = "<group>"; };
+		8934E7D81896CFD200854DC8 /* SFMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SFMasterViewController.m; path = GithubToGo/SFMasterViewController.m; sourceTree = "<group>"; };
+		8934E7DA1896CFD200854DC8 /* SFDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SFDetailViewController.h; path = GithubToGo/SFDetailViewController.h; sourceTree = "<group>"; };
+		8934E7DB1896CFD200854DC8 /* SFDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SFDetailViewController.m; path = GithubToGo/SFDetailViewController.m; sourceTree = "<group>"; };
 		8934E7DD1896CFD200854DC8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8934E7E31896CFD200854DC8 /* GithubToGoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GithubToGoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8934E7E41896CFD200854DC8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		8934E7EC1896CFD200854DC8 /* GithubToGoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GithubToGoTests-Info.plist"; sourceTree = "<group>"; };
 		8934E7EE1896CFD200854DC8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8934E7F01896CFD200854DC8 /* GithubToGoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GithubToGoTests.m; sourceTree = "<group>"; };
-		8934E7FA1896D30400854DC8 /* SFNetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFNetworkController.h; path = ../SFNetworkController.h; sourceTree = "<group>"; };
-		8934E7FB1896D30400854DC8 /* SFNetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFNetworkController.m; path = ../SFNetworkController.m; sourceTree = "<group>"; };
-		8934E7FD1896FD4100854DC8 /* SFReposTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFReposTableViewController.h; path = ../SFReposTableViewController.h; sourceTree = "<group>"; };
-		8934E7FE1896FD4100854DC8 /* SFReposTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFReposTableViewController.m; path = ../SFReposTableViewController.m; sourceTree = "<group>"; };
-		89EA254018985580006ADEB6 /* SFBarMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFBarMenuTableViewController.h; path = ../SFBarMenuTableViewController.h; sourceTree = "<group>"; };
-		89EA254118985580006ADEB6 /* SFBarMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFBarMenuTableViewController.m; path = ../SFBarMenuTableViewController.m; sourceTree = "<group>"; };
-		89EA254318985A51006ADEB6 /* SFUserCollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFUserCollectionController.h; path = ../SFUserCollectionController.h; sourceTree = "<group>"; };
-		89EA254418985A51006ADEB6 /* SFUserCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFUserCollectionController.m; path = ../SFUserCollectionController.m; sourceTree = "<group>"; };
+		8934E7FA1896D30400854DC8 /* SFNetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFNetworkController.h; sourceTree = "<group>"; };
+		8934E7FB1896D30400854DC8 /* SFNetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFNetworkController.m; sourceTree = "<group>"; };
+		8934E7FD1896FD4100854DC8 /* SFReposTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFReposTableViewController.h; sourceTree = "<group>"; };
+		8934E7FE1896FD4100854DC8 /* SFReposTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFReposTableViewController.m; sourceTree = "<group>"; };
+		89EA254018985580006ADEB6 /* SFBarMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFBarMenuTableViewController.h; sourceTree = "<group>"; };
+		89EA254118985580006ADEB6 /* SFBarMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFBarMenuTableViewController.m; sourceTree = "<group>"; };
+		89EA254318985A51006ADEB6 /* SFUserCollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFUserCollectionController.h; sourceTree = "<group>"; };
+		89EA254418985A51006ADEB6 /* SFUserCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFUserCollectionController.m; sourceTree = "<group>"; };
 		89EA254A1898635F006ADEB6 /* Cheeseburger@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cheeseburger@2x.png"; sourceTree = "<group>"; };
 		89EA254E18986377006ADEB6 /* Cheeseburger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cheeseburger.png; sourceTree = "<group>"; };
+		89EA25541898694D006ADEB6 /* SFUserCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFUserCollectionCell.h; sourceTree = "<group>"; };
+		89EA25551898694D006ADEB6 /* SFUserCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFUserCollectionCell.m; sourceTree = "<group>"; };
+		89EA255718986B47006ADEB6 /* GitUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GitUser.h; path = ../GitUser.h; sourceTree = "<group>"; };
+		89EA255818986B47006ADEB6 /* GitUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GitUser.m; path = ../GitUser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,24 +139,14 @@
 		8934E7C51896CFD200854DC8 /* GithubToGo */ = {
 			isa = PBXGroup;
 			children = (
-				89EA254E18986377006ADEB6 /* Cheeseburger.png */,
-				89EA254A1898635F006ADEB6 /* Cheeseburger@2x.png */,
-				89EA254318985A51006ADEB6 /* SFUserCollectionController.h */,
-				89EA254418985A51006ADEB6 /* SFUserCollectionController.m */,
-				89EA254018985580006ADEB6 /* SFBarMenuTableViewController.h */,
-				89EA254118985580006ADEB6 /* SFBarMenuTableViewController.m */,
-				8934E7FD1896FD4100854DC8 /* SFReposTableViewController.h */,
-				8934E7FE1896FD4100854DC8 /* SFReposTableViewController.m */,
-				8934E7FA1896D30400854DC8 /* SFNetworkController.h */,
-				8934E7FB1896D30400854DC8 /* SFNetworkController.m */,
+				89EA25531898691D006ADEB6 /* Controller */,
+				89EA255218986915006ADEB6 /* View */,
+				89EA25511898690A006ADEB6 /* Model */,
+				89EA2550189866DA006ADEB6 /* Image Assets */,
 				8934E7CE1896CFD200854DC8 /* SFAppDelegate.h */,
 				8934E7CF1896CFD200854DC8 /* SFAppDelegate.m */,
 				8934E7D11896CFD200854DC8 /* Main_iPhone.storyboard */,
 				8934E7D41896CFD200854DC8 /* Main_iPad.storyboard */,
-				8934E7D71896CFD200854DC8 /* SFMasterViewController.h */,
-				8934E7D81896CFD200854DC8 /* SFMasterViewController.m */,
-				8934E7DA1896CFD200854DC8 /* SFDetailViewController.h */,
-				8934E7DB1896CFD200854DC8 /* SFDetailViewController.m */,
 				8934E7DD1896CFD200854DC8 /* Images.xcassets */,
 				8934E7C61896CFD200854DC8 /* Supporting Files */,
 			);
@@ -184,6 +180,54 @@
 				8934E7ED1896CFD200854DC8 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		89EA2550189866DA006ADEB6 /* Image Assets */ = {
+			isa = PBXGroup;
+			children = (
+				89EA254E18986377006ADEB6 /* Cheeseburger.png */,
+				89EA254A1898635F006ADEB6 /* Cheeseburger@2x.png */,
+			);
+			name = "Image Assets";
+			sourceTree = "<group>";
+		};
+		89EA25511898690A006ADEB6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				89EA255718986B47006ADEB6 /* GitUser.h */,
+				89EA255818986B47006ADEB6 /* GitUser.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		89EA255218986915006ADEB6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				89EA25541898694D006ADEB6 /* SFUserCollectionCell.h */,
+				89EA25551898694D006ADEB6 /* SFUserCollectionCell.m */,
+			);
+			name = View;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		89EA25531898691D006ADEB6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8934E7D71896CFD200854DC8 /* SFMasterViewController.h */,
+				8934E7D81896CFD200854DC8 /* SFMasterViewController.m */,
+				8934E7DA1896CFD200854DC8 /* SFDetailViewController.h */,
+				8934E7DB1896CFD200854DC8 /* SFDetailViewController.m */,
+				89EA254318985A51006ADEB6 /* SFUserCollectionController.h */,
+				89EA254418985A51006ADEB6 /* SFUserCollectionController.m */,
+				89EA254018985580006ADEB6 /* SFBarMenuTableViewController.h */,
+				89EA254118985580006ADEB6 /* SFBarMenuTableViewController.m */,
+				8934E7FD1896FD4100854DC8 /* SFReposTableViewController.h */,
+				8934E7FE1896FD4100854DC8 /* SFReposTableViewController.m */,
+				8934E7FA1896D30400854DC8 /* SFNetworkController.h */,
+				8934E7FB1896D30400854DC8 /* SFNetworkController.m */,
+			);
+			name = Controller;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,10 +334,12 @@
 				8934E7D91896CFD200854DC8 /* SFMasterViewController.m in Sources */,
 				8934E7FC1896D30400854DC8 /* SFNetworkController.m in Sources */,
 				8934E7CC1896CFD200854DC8 /* main.m in Sources */,
+				89EA255918986B47006ADEB6 /* GitUser.m in Sources */,
 				89EA254218985580006ADEB6 /* SFBarMenuTableViewController.m in Sources */,
 				8934E7DC1896CFD200854DC8 /* SFDetailViewController.m in Sources */,
 				8934E7D01896CFD200854DC8 /* SFAppDelegate.m in Sources */,
 				8934E7FF1896FD4100854DC8 /* SFReposTableViewController.m in Sources */,
+				89EA25561898694D006ADEB6 /* SFUserCollectionCell.m in Sources */,
 				89EA254518985A51006ADEB6 /* SFUserCollectionController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

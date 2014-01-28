@@ -43,6 +43,7 @@
 //    [self.view addSubview:self.userViewController.view];
 //    [self.userViewController didMoveToParentViewController:self];
     
+    //Repo Search controller declaration
     self.repoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubReposWebViewController"];
     [self addChildViewController:self.repoViewController];
     self.repoViewController.view.frame = self.view.frame;
@@ -68,6 +69,7 @@
     pan.delegate = self;
     
     [self.repoViewController.view addGestureRecognizer:pan];
+    [self.userViewController.view addGestureRecognizer:pan];
     
 }
 
@@ -208,6 +210,28 @@
 
  */
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0) {
+        NSLog(@"Repos");
+    }
+    if (indexPath.row == 1) {
+        NSLog(@"Users");
+
+    }
+//        self.userViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubUserCollectionView"];
+//        [self addChildViewController:self.userViewController];
+//        self.userViewController.view.frame = self.view.frame;
+//        [self.view addSubview:self.userViewController.view];
+//        [self.userViewController didMoveToParentViewController:self];
+//    } else if ([indexPath isEqual:@1]) {
+//        self.userViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubUserCollectionView"];
+//        [self addChildViewController:self.userViewController];
+//        self.userViewController.view.frame = self.view.frame;
+//        [self.view addSubview:self.userViewController.view];
+//        [self.userViewController didMoveToParentViewController:self];
+    
+}
 - (IBAction)sideBarButton:(id)sender {
     if (!self.isOpen) {
         [self openMenu];

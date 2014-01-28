@@ -40,8 +40,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    //self.searchResults = (NSMutableArray *)[[SFNetworkController sharedController] reposForSearchString:self.githubSearchBar.text];
-    NSLog(@"%@", self.githubSearchBar.text);
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -127,15 +126,6 @@
 
  */
 
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-//        NSDictionary *repoDict = _searchResults[indexPath.row];
-//        [[segue destinationViewController] setDetailItem:repoDict];
-//    }
-//}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
@@ -144,18 +134,6 @@
         [[segue destinationViewController] setDetailItem:repoDict];
     }
 }
-
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    NSDictionary *repoDict = _searchResults[indexPath.row];
-//    self.detailViewController = (SFDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
-//    //SFDetailViewController *controller = (segue *)SFDetailViewController;
-//   // controller
-//    self.detailViewController.detailItem = repoDict;
-//    
-//    //NSLog(@"%@", repoDict);
-//    
-//}
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
@@ -175,7 +153,6 @@
     } else {
         [self.tableView reloadData];
     }
-    
 }
 
 @end

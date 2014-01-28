@@ -7,11 +7,12 @@
 //
 
 #import "SFUserCollectionController.h"
+#import "SFUserCollectionCell.h"
 #import "SFNetworkController.h"
 
 @interface SFUserCollectionController ()
 
-@property (nonatomic) NSMutableArray *searchResults;
+@property (nonatomic) NSMutableArray *gitUsers;
 @property (weak, nonatomic) IBOutlet UISearchBar *userSearchBar;
 @property (weak, nonatomic) IBOutlet UICollectionView *userCollectionView;
 
@@ -43,7 +44,7 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [[UICollectionViewCell init] dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    SFUserCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     
     cell.backgroundColor = [UIColor redColor];
     
@@ -61,15 +62,14 @@
 - (void)githubSearch:(NSString *)string
 {
     NSLog(@"%@", string);
-    self.searchResults = (NSMutableArray *)[[SFNetworkController sharedController] reposForSearchString:string];
-    if (self.searchResults == nil) {
+    string = [string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    self.gitUsers= (NSMutableArray *)[[SFNetworkController sharedController] reposForSearchString:string];
+    if (self.gitUsers == nil) {
         
     } else {
         [self.userCollectionView reloadData];
     }
     
 }
-
-//-(UICollectionViewCell)
 
 @end
