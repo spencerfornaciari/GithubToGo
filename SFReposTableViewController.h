@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SFIphoneTableViewController : UITableViewController <UIGestureRecognizerDelegate, UISearchBarDelegate>
+@interface SFReposTableViewController : UITableViewController <UIGestureRecognizerDelegate, UISearchBarDelegate>
 
 @end

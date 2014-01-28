@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Spencer Fornaciari. All rights reserved.
 //
 
-#import "SFIphoneTableViewController.h"
+#import "SFReposTableViewController.h"
 #import "SFDetailViewController.h"
 #import "SFNetworkController.h"
 
-@interface SFIphoneTableViewController ()
+@interface SFReposTableViewController ()
 
 @property (nonatomic) NSMutableArray *searchResults;
 @property (nonatomic) SFDetailViewController *detailViewController;
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation SFIphoneTableViewController
+@implementation SFReposTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -34,17 +34,8 @@
     [super viewDidLoad];
     
     self.githubSearchBar.delegate = self;
-    
     self.searchResults = (NSMutableArray *)[[SFNetworkController sharedController] reposForSearchString:@"iOS"];
 
-    self.detailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubWebViewController"];
-    
-    [self addChildViewController:self.detailViewController];
-    self.detailViewController.view.frame = CGRectMake(self.view.frame.size.width * .8, self.detailViewController.view.frame.origin.y, self.detailViewController.view.frame.size.width, self.detailViewController.view.frame.size.height);
-    [self.view addSubview:self.detailViewController.view];
-    [self.detailViewController didMoveToParentViewController:self];
-    
-    [self setupPanGesture];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -59,80 +50,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)setupPanGesture
-{
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(slidePanel:)];
-    
-    pan.minimumNumberOfTouches = 1;
-    pan.maximumNumberOfTouches = 1;
-    
-    pan.delegate = self;
-    
-    [self.detailViewController.view addGestureRecognizer:pan];
-    
-}
-
-
--(void)slidePanel:(id)sender
-{
-    UIPanGestureRecognizer *pan = (UIPanGestureRecognizer *)sender;
-    
-    CGPoint translation = [pan translationInView:self.view];
-    
-    if (pan.state == UIGestureRecognizerStateChanged)
-    {
-        if (self.detailViewController.view.frame.origin.x+ translation.x > 0) {
-            
-            self.detailViewController.view.center = CGPointMake(self.detailViewController.view.center.x +translation.x, self.detailViewController.view.center.y);
-        
-            [(UIPanGestureRecognizer *)sender setTranslation:CGPointMake(0,0) inView:self.view];
-        }
-        
-    }
-    
-    if (pan.state == UIGestureRecognizerStateEnded)
-    {
-        if (self.detailViewController.view.frame.origin.x > self.view.frame.size.width / 2)
-        {
-            [self openMenu];
-        }
-        if (self.detailViewController.view.frame.origin.x < self.view.frame.size.width / 2 )
-        {
-            [self closeMenu];
-        }
-    }
-    
-}
-
-- (void)openMenu
-{
-    [UIView animateWithDuration:.4 animations:^{
-        self.detailViewController.view.frame = CGRectMake(self.view.frame.size.width * .8, self.detailViewController.view.frame.origin.y, self.detailViewController.view.frame.size.width, self.detailViewController.view.frame.size.height);
-    } completion:^(BOOL finished) {
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(slideBack:)];
-        [self.detailViewController.view addGestureRecognizer:tap];
-    }];
-}
-
-- (void)closeMenu
-{
-    [UIView animateWithDuration:.4 animations:
-     ^{
-        self.detailViewController.view.frame = CGRectMake(self.detailViewController.view.frame.origin.x + 20.f, self.detailViewController.view.frame.origin.y, self.detailViewController.view.frame.size.width, self.detailViewController.view.frame.size.height);
-    } completion:^(BOOL finished) {
-            self.detailViewController.view.frame = self.view.frame;
-        }];
-}
-
--(void)slideBack:(id)sender
-{
-    [UIView animateWithDuration:.4 animations:^{
-        self.detailViewController.view.frame = self.view.frame;
-    } completion:^(BOOL finished) {
-        [self.detailViewController.view removeGestureRecognizer:(UITapGestureRecognizer *)sender];
-        [self closeMenu];
-    }];
-}
 
 #pragma mark - Table view data source
 
@@ -210,11 +127,24 @@
 
  */
 
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    if ([[segue identifier] isEqualToString:@"showDetail"]) {
+//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+//        NSDictionary *repoDict = _searchResults[indexPath.row];
+//        [[segue destinationViewController] setDetailItem:repoDict];
+//    }
+//}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *repoDict = _searchResults[indexPath.row];
+    self.detailViewController = (SFDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    //SFDetailViewController *controller = (segue *)SFDetailViewController;
+   // controller
     self.detailViewController.detailItem = repoDict;
-    [self closeMenu];
+    
+    //NSLog(@"%@", repoDict);
     
 }
 
@@ -229,6 +159,7 @@
 - (void)githubSearch:(NSString *)string
 {
     NSLog(@"%@", string);
+    string = [string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     self.searchResults = (NSMutableArray *)[[SFNetworkController sharedController] reposForSearchString:string];
     if (self.searchResults == nil) {
         
