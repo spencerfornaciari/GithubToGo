@@ -16,7 +16,7 @@
                             <tableViewSection id="oYB-cM-5OP">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="DGt-SV-kg2" style="IBUITableViewCellStyleDefault" id="0hR-E4-DSn">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0hR-E4-DSn" id="AyL-Rh-7af">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -33,7 +33,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="pNv-cW-Wze" style="IBUITableViewCellStyleDefault" id="kOb-lQ-LwT">
-                                        <rect key="frame" x="0.0" y="44" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="108" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kOb-lQ-LwT" id="7KZ-iH-KK8">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -103,7 +103,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="Ah7-4n-0Wa" kind="push" id="E8A-9o-F4a"/>
+                                    <segue destination="Ah7-4n-0Wa" kind="push" identifier="showDetail" id="E8A-9o-F4a"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

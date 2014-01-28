@@ -136,17 +136,26 @@
 //    }
 //}
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSDictionary *repoDict = _searchResults[indexPath.row];
-    self.detailViewController = (SFDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
-    //SFDetailViewController *controller = (segue *)SFDetailViewController;
-   // controller
-    self.detailViewController.detailItem = repoDict;
-    
-    //NSLog(@"%@", repoDict);
-    
+    if ([[segue identifier] isEqualToString:@"showDetail"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        NSDictionary *repoDict = _searchResults[indexPath.row];
+        [[segue destinationViewController] setDetailItem:repoDict];
+    }
 }
+
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    NSDictionary *repoDict = _searchResults[indexPath.row];
+//    self.detailViewController = (SFDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+//    //SFDetailViewController *controller = (segue *)SFDetailViewController;
+//   // controller
+//    self.detailViewController.detailItem = repoDict;
+//    
+//    //NSLog(@"%@", repoDict);
+//    
+//}
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
