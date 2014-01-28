@@ -36,4 +36,19 @@
     return searchDictionary[@"items"];
 }
 
+- (NSArray *)usersForSearchString:(NSString *)searchString
+{
+    searchString = [NSString stringWithFormat:@"https://api.github.com/search/users?q=%@", searchString];
+    NSURL *searchURL = [NSURL URLWithString:searchString];
+    
+    NSError *error;
+    
+    NSData *searchData = [NSData dataWithContentsOfURL:searchURL];
+    NSDictionary *searchDictionary = [NSJSONSerialization JSONObjectWithData:searchData options:NSJSONReadingMutableContainers error:&error];
+    
+    return searchDictionary[@"items"];
+}
+
+
+
 @end

@@ -9,10 +9,14 @@
 #import "SFUserCollectionController.h"
 #import "SFUserCollectionCell.h"
 #import "SFNetworkController.h"
+#import "GitUser.h"
 
 @interface SFUserCollectionController ()
 
 @property (nonatomic) NSMutableArray *gitUsers;
+@property (nonatomic) NSMutableArray *searchResults;
+@property (nonatomic) NSOperationQueue *downloadQueue;
+
 @property (weak, nonatomic) IBOutlet UISearchBar *userSearchBar;
 @property (weak, nonatomic) IBOutlet UICollectionView *userCollectionView;
 
@@ -28,6 +32,15 @@
     self.userCollectionView.delegate = self;
     self.userCollectionView.dataSource = self;
     
+    _downloadQueue = [NSOperationQueue new];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(downloadFinished:)
+                                                 name:@"DownloadedImage"
+                                               object:nil];
+    
+    self.view.backgroundColor = [UIColor lightGrayColor];
+    
 	// Do any additional setup after loading the view.
 }
 
@@ -39,21 +52,36 @@
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 8;
+    return self.gitUsers.count;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SFUserCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     
-    cell.backgroundColor = [UIColor redColor];
+    //cell.backgroundColor = [UIColor redColor];
+    
+    GitUser *user = self.gitUsers[indexPath.row];
+    
+    if (user.photo) {
+        cell.userProfileImage.image = user.photo;
+    } else {
+        if (!user.isDownloading) {
+            [user downloadAvatar];
+            user.isDownloading = YES;
+            //customCell.backgroundColor = [UIColor redColor];
+        }
+    }
     
     return cell;
 }
 
+#pragma mark - UICollectionView Search Functionality
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     searchBar.keyboardType = UIKeyboardTypeWebSearch;
+    self.gitUsers = [NSMutableArray new];
     
     [searchBar resignFirstResponder];
     [self githubSearch:searchBar.text];
@@ -63,13 +91,62 @@
 {
     NSLog(@"%@", string);
     string = [string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    self.gitUsers= (NSMutableArray *)[[SFNetworkController sharedController] reposForSearchString:string];
-    if (self.gitUsers == nil) {
+    
+    NSError *error;
+    
+    @try {
+        self.searchResults = (NSMutableArray *)[[SFNetworkController sharedController] usersForSearchString:string];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"API Limit Reached? %@", exception.debugDescription);
+        if (error) {
+            NSLog(@"Error: %@", error.debugDescription);
+        }
+    }
+    
+    if (self.searchResults == nil) {
         
     } else {
-        [self.userCollectionView reloadData];
+        [self createGitUsersArray];
     }
     
 }
+
+#pragma mark - Git User Model Methods
+
+//Create Git Users Array
+- (void)createGitUsersArray
+{
+    for (NSDictionary *dictionary in self.searchResults) {
+        GitUser *user = [GitUser new];
+        user.name = dictionary[@"login"];
+        user.photoLocation = dictionary[@"avatar_url"];
+        user.downloadQueue = self.downloadQueue;
+        NSLog(@"%@", user.name);
+        
+        [self.gitUsers addObject:user];
+    }
+    
+    //NSLog(@"%@", self.gitUsers);
+    [self.userCollectionView reloadData];
+}
+
+#pragma mark - NSNotificationCenter Methods
+
+- (void)downloadFinished:(NSNotification *)note
+{
+    id sender = [[note userInfo] objectForKey:@"user"];
+    
+    if ([sender isKindOfClass:[GitUser class]]) {
+        NSLog(@"Download Finished For User: %@", sender);
+        NSIndexPath *userPath = [NSIndexPath indexPathForItem:[_gitUsers indexOfObject:sender] inSection:0];
+        //SFUserCollectionCell *cell = [self.userCollectionView cellForItemAtIndexPath:userPath];
+        //cell.isDownloading = NO;
+        [self.userCollectionView reloadItemsAtIndexPaths:@[userPath]];
+    } else {
+        NSLog(@"Sender was not a GitUser");
+    }
+}
+
 
 @end

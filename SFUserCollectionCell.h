@@ -11,4 +11,5 @@
 @interface SFUserCollectionCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *userProfileImage;
 
+
 @end

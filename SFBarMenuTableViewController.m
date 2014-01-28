@@ -14,6 +14,8 @@
 
 @property (nonatomic) SFReposTableViewController *repoViewController;
 @property (nonatomic) SFUserCollectionController *userViewController;
+@property (nonatomic) UIViewController *topViewController;
+
 @property (nonatomic) BOOL isOpen;
 
 - (IBAction)sideBarButton:(id)sender;
@@ -37,18 +39,22 @@
     
     self.isOpen = NO;
     
-//    self.userViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubUserCollectionView"];
-//    [self addChildViewController:self.userViewController];
-//    self.userViewController.view.frame = self.view.frame;
-//    [self.view addSubview:self.userViewController.view];
-//    [self.userViewController didMoveToParentViewController:self];
+    self.userViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubUserCollectionView"];
+    [self addChildViewController:self.userViewController];
+    self.userViewController.view.frame = self.view.frame;
+    [self.view addSubview:self.userViewController.view];
+    [self.userViewController didMoveToParentViewController:self];
+    
+    self.userViewController = (SFUserCollectionController *)self.topViewController;
+    
+    
     
     //Repo Search controller declaration
-    self.repoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubReposWebViewController"];
-    [self addChildViewController:self.repoViewController];
-    self.repoViewController.view.frame = self.view.frame;
-    [self.view addSubview:self.repoViewController.view];
-    [self.repoViewController didMoveToParentViewController:self];
+//    self.repoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubReposWebViewController"];
+//    [self addChildViewController:self.repoViewController];
+//    self.repoViewController.view.frame = self.view.frame;
+//    [self.view addSubview:self.repoViewController.view];
+//    [self.repoViewController didMoveToParentViewController:self];
     
     [self setupPanGesture];
 
@@ -81,9 +87,9 @@
     
     if (pan.state == UIGestureRecognizerStateChanged)
     {
-        if (self.repoViewController.view.frame.origin.x+ translation.x > 0) {
+        if (self.topViewController.view.frame.origin.x+ translation.x > 0) {
             
-            self.repoViewController.view.center = CGPointMake(self.repoViewController.view.center.x +translation.x, self.repoViewController.view.center.y);
+            self.topViewController.view.center = CGPointMake(self.topViewController.view.center.x +translation.x, self.topViewController.view.center.y);
             
             [(UIPanGestureRecognizer *)sender setTranslation:CGPointMake(0,0) inView:self.view];
         }
@@ -92,11 +98,11 @@
     
     if (pan.state == UIGestureRecognizerStateEnded)
     {
-        if (self.repoViewController.view.frame.origin.x > self.view.frame.size.width / 2)
+        if (self.topViewController.view.frame.origin.x > self.view.frame.size.width / 2)
         {
             [self openMenu];
         }
-        if (self.repoViewController.view.frame.origin.x < self.view.frame.size.width / 2 )
+        if (self.topViewController.view.frame.origin.x < self.view.frame.size.width / 2 )
         {
             [self closeMenu];
         }
@@ -107,10 +113,10 @@
 - (void)openMenu
 {
     [UIView animateWithDuration:.4 animations:^{
-        self.repoViewController.view.frame = CGRectMake(self.view.frame.size.width * .5, self.repoViewController.view.frame.origin.y, self.repoViewController.view.frame.size.width, self.repoViewController.view.frame.size.height);
+        self.topViewController.view.frame = CGRectMake(self.view.frame.size.width * .5, self.topViewController.view.frame.origin.y, self.topViewController.view.frame.size.width, self.topViewController.view.frame.size.height);
     } completion:^(BOOL finished) {
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(slideBack:)];
-        [self.repoViewController.view addGestureRecognizer:tap];
+        [self.topViewController.view addGestureRecognizer:tap];
     }];
 }
 
@@ -120,7 +126,7 @@
      ^{
          //self.repoViewController.view.frame = CGRectMake(self.repoViewController.view.frame.origin.x, self.self.repoViewController.view.frame.origin.y, self.repoViewController.view.frame.size.width, self.repoViewController.view.frame.size.height);
          
-         self.repoViewController.view.frame = self.view.frame;
+         self.topViewController.view.frame = self.view.frame;
      } completion:^(BOOL finished) {
          //self.repoViewController.view.frame = self.view.frame;
      }];
@@ -129,8 +135,8 @@
 -(void)slideBack:(id)sender
 {
     [UIView animateWithDuration:.4 animations:^{
-        self.repoViewController.view.frame = self.view.frame;
-        [self.repoViewController.view removeGestureRecognizer:(UITapGestureRecognizer *)sender];
+        self.topViewController.view.frame = self.view.frame;
+        [self.topViewController.view removeGestureRecognizer:(UITapGestureRecognizer *)sender];
         [self closeMenu];
     } completion:^(BOOL finished) {
         

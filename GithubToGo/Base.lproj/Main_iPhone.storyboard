@@ -9,7 +9,7 @@
             <objects>
                 <tableViewController id="WWP-If-vff" customClass="SFBarMenuTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="Cell" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ksh-hB-UxM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
@@ -76,7 +76,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="githubReposWebViewController" title="Master" id="pGg-6v-bdr" customClass="SFReposTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="mLL-gJ-YKr">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="OMX-7o-JlO">
@@ -131,11 +131,11 @@
                         <viewControllerLayoutGuide type="bottom" id="wdB-Rt-0s6"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MMQ-IT-qOo">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mIx-lj-06I">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
@@ -160,17 +160,18 @@
                         <viewControllerLayoutGuide type="bottom" id="CnN-ss-qW9"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cRy-e1-gND">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tf6-4q-uoK">
+                            <searchBar contentMode="redraw" placeholder="Search Username" translatesAutoresizingMaskIntoConstraints="NO" id="Tf6-4q-uoK">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7ZB-AF-UU3">
-                                <rect key="frame" x="0.0" y="44" width="320" height="524"/>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7ZB-AF-UU3">
+                                <rect key="frame" x="0.0" y="44" width="320" height="436"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="3c3-S4-xtH">
                                     <size key="itemSize" width="150" height="150"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -227,6 +228,15 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Tf6-4q-uoK" firstAttribute="leading" secondItem="cRy-e1-gND" secondAttribute="leading" id="5QI-V8-bQa"/>
+                            <constraint firstAttribute="trailing" secondItem="Tf6-4q-uoK" secondAttribute="trailing" id="8eL-vQ-Xlg"/>
+                            <constraint firstItem="7ZB-AF-UU3" firstAttribute="top" secondItem="Tf6-4q-uoK" secondAttribute="bottom" id="E5Q-41-Kat"/>
+                            <constraint firstItem="Tf6-4q-uoK" firstAttribute="top" secondItem="cRy-e1-gND" secondAttribute="top" id="Jja-pn-g6a"/>
+                            <constraint firstItem="7ZB-AF-UU3" firstAttribute="leading" secondItem="Tf6-4q-uoK" secondAttribute="leading" id="nea-IB-OW3"/>
+                            <constraint firstAttribute="bottom" secondItem="7ZB-AF-UU3" secondAttribute="bottom" id="q6n-yh-0yh"/>
+                            <constraint firstItem="Tf6-4q-uoK" firstAttribute="trailing" secondItem="7ZB-AF-UU3" secondAttribute="trailing" id="qDZ-LL-IkD"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="userCollectionView" destination="7ZB-AF-UU3" id="pEl-m6-o9n"/>
@@ -262,6 +272,6 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>

@@ -10,8 +10,13 @@
 
 @interface GitUser : NSObject
 
-@property (nonatomic) NSString *username;
-@property (nonatomic) NSString *userPhotoLocation;
-@property (nonatomic) UIImage *userPhoto;
+@property (nonatomic) NSString *name;
+@property (nonatomic) NSString *photoLocation;
+@property (nonatomic) UIImage *photo;
+@property (nonatomic) BOOL isDownloading;
+
+@property (nonatomic, weak) NSOperationQueue *downloadQueue;
+
+-(void)downloadAvatar;
 
 @end
