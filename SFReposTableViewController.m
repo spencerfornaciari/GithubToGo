@@ -152,7 +152,19 @@
 {
     NSLog(@"%@", string);
     string = [string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    self.searchResults = (NSMutableArray *)[[SFNetworkController sharedController] reposForSearchString:string];
+    
+    NSError *error;
+    
+    @try {
+        self.searchResults = (NSMutableArray *)[[SFNetworkController sharedController] usersForSearchString:string];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"API Limit Reached? %@", exception.debugDescription);
+        if (error) {
+            NSLog(@"Error: %@", error.debugDescription);
+        }
+    }
+    
     if (self.searchResults == nil) {
         
     } else {
