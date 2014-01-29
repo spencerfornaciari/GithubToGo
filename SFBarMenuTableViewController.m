@@ -111,6 +111,7 @@
 
 - (void)openMenu
 {
+    [self.topViewController.view setUserInteractionEnabled:NO];
     [UIView animateWithDuration:.4 animations:^{
         self.topViewController.view.frame = CGRectMake(self.view.frame.size.width * .5, self.topViewController.view.frame.origin.y, self.topViewController.view.frame.size.width, self.topViewController.view.frame.size.height);
     } completion:^(BOOL finished) {
@@ -121,13 +122,13 @@
 
 - (void)closeMenu
 {
+    [self.topViewController.view setUserInteractionEnabled:YES];
     [UIView animateWithDuration:.4 animations:
      ^{
          //self.repoViewController.view.frame = CGRectMake(self.repoViewController.view.frame.origin.x, self.self.repoViewController.view.frame.origin.y, self.repoViewController.view.frame.size.width, self.repoViewController.view.frame.size.height);
          
          self.topViewController.view.frame = self.view.frame;
      } completion:^(BOOL finished) {
-         
      }];
 }
 
@@ -224,6 +225,8 @@
         [self.view addSubview:self.repoViewController.view];
         [self.repoViewController didMoveToParentViewController:self];
         [self setupPanGesture];
+        self.isOpen = NO;
+        [self closeMenu];
     }
     if (indexPath.row == 1) {
         self.userViewController.view.frame = self.topViewController.view.frame;
@@ -232,6 +235,8 @@
         [self.view addSubview:self.userViewController.view];
         [self.userViewController didMoveToParentViewController:self];
         [self setupPanGesture];
+        self.isOpen = NO;
+        [self closeMenu];
     }
 }
 - (IBAction)sideBarButton:(id)sender {

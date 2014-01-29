@@ -39,7 +39,7 @@
                                                  name:@"DownloadedImage"
                                                object:nil];
     
-    self.searchResults = (NSMutableArray *)[[SFNetworkController sharedController] reposForSearchString:@"Joe"];
+    //self.searchResults = (NSMutableArray *)[[SFNetworkController sharedController] reposForSearchString:@"Joe"];
 
     
 	// Do any additional setup after loading the view.
