@@ -11,6 +11,7 @@
 @interface GitUser : NSObject
 
 @property (nonatomic) NSString *name;
+@property (nonatomic) NSString *html_url;
 @property (nonatomic) NSString *photoLocation;
 @property (nonatomic) UIImage *photo;
 @property (nonatomic) BOOL isDownloading;

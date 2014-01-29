@@ -7,6 +7,7 @@
 //
 
 #import "SFUserCollectionController.h"
+#import "SFDetailViewController.h"
 #import "SFUserCollectionCell.h"
 #import "SFNetworkController.h"
 #import "GitUser.h"
@@ -120,6 +121,8 @@
     for (NSDictionary *dictionary in self.searchResults) {
         GitUser *user = [GitUser new];
         user.name = dictionary[@"login"];
+        user.html_url = dictionary[@"html_url"];
+        //NSLog(@"%@", user.profilePage);
         user.photoLocation = dictionary[@"avatar_url"];
         user.downloadQueue = self.downloadQueue;
         [self.gitUsers addObject:user];
@@ -138,6 +141,15 @@
         [self.userCollectionView reloadItemsAtIndexPaths:@[userPath]];
     } else {
         NSLog(@"Sender was not a GitUser");
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"showDetail"]) {
+        NSIndexPath *indexPath = [self.userCollectionView indexPathForCell:(SFUserCollectionCell *)sender];
+        NSDictionary *repoDict = _searchResults[indexPath.row];
+       [[segue destinationViewController] setDetailItem:repoDict];
     }
 }
 
