@@ -164,7 +164,14 @@
     return 2;
 }
 
-
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    NSLog(@"Did Rotate");
+    self.userViewController.view.frame = self.view.frame;
+//    [self.userViewController.userCollectionView setNeedsUpdateConstraints];
+//    [self.userViewController.userCollectionView reloadData];
+    [self.userViewController.userCollectionView setNeedsDisplay];
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -238,12 +245,15 @@
         self.isOpen = NO;
         [self closeMenu];
     }
+    
+    [self.tableView resignFirstResponder];
 }
 - (IBAction)sideBarButton:(id)sender {
     
     if (!self.isOpen) {
         [self openMenu];
         self.isOpen = YES;
+        [self.tableView becomeFirstResponder];
     } else {
         [self closeMenu];
         self.isOpen = NO;

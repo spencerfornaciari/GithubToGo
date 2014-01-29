@@ -10,4 +10,6 @@
 
 @interface SFUserCollectionController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate>
 
+@property (weak, nonatomic) IBOutlet UICollectionView *userCollectionView;
+
 @end

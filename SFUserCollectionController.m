@@ -18,8 +18,6 @@
 @property (nonatomic) NSMutableArray *searchResults;
 @property (nonatomic) NSOperationQueue *downloadQueue;
 
-@property (weak, nonatomic) IBOutlet UISearchBar *userSearchBar;
-@property (weak, nonatomic) IBOutlet UICollectionView *userCollectionView;
 
 @end
 
@@ -29,7 +27,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.userSearchBar.delegate = self;
     self.userCollectionView.delegate = self;
     self.userCollectionView.dataSource = self;
     
@@ -45,6 +42,8 @@
     
 	// Do any additional setup after loading the view.
 }
+
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -75,6 +74,12 @@
     }
     
     return cell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+   
+    return [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"searchHeader" forIndexPath:indexPath];
 }
 
 #pragma mark - UICollectionView Search Functionality
