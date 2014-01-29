@@ -10,6 +10,6 @@
 
 @interface SFUserCollectionCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *userProfileImage;
-
+@property (weak, nonatomic) IBOutlet UILabel *userName;
 
 @end

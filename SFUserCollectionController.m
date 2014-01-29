@@ -62,6 +62,8 @@
         
     GitUser *user = self.gitUsers[indexPath.row];
     
+    cell.userName.text = [self.gitUsers[indexPath.row] name];
+    
     if (user.photo) {
         cell.userProfileImage.image = user.photo;
     } else {

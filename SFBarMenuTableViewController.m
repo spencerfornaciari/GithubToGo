@@ -39,18 +39,6 @@
     
     self.isOpen = NO;
     
-    self.userViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubUserCollectionView"];
-    [self addChildViewController:self.userViewController];
-    self.userViewController.view.frame = self.view.frame;
-    
-
-//    [self.view addSubview:self.userViewController.view];
-//    [self.userViewController didMoveToParentViewController:self];
-    
-    //self.topViewController = self.userViewController;
-    
-    
-    
     //Repo Search controller declaration
     self.repoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubReposWebViewController"];
     [self addChildViewController:self.repoViewController];
@@ -59,8 +47,14 @@
     [self.repoViewController didMoveToParentViewController:self];
     
     self.topViewController = self.repoViewController;
-
     [self setupPanGesture];
+    
+    //User Search controller declaration
+    self.userViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubUserCollectionView"];
+    [self addChildViewController:self.userViewController];
+    self.userViewController.view.frame = self.view.frame;
+
+    
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -78,8 +72,9 @@
     
     pan.delegate = self;
     
-    [self.repoViewController.view addGestureRecognizer:pan];
-    [self.userViewController.view addGestureRecognizer:pan];
+    [self.topViewController.view addGestureRecognizer:pan];
+    //[self.repoViewController.view addGestureRecognizer:pan];
+    //[self.userViewController.view addGestureRecognizer:pan];
     
 }
 
@@ -132,7 +127,7 @@
          
          self.topViewController.view.frame = self.view.frame;
      } completion:^(BOOL finished) {
-         //self.repoViewController.view.frame = self.view.frame;
+         
      }];
 }
 
@@ -228,6 +223,7 @@
         self.topViewController = self.repoViewController;
         [self.view addSubview:self.repoViewController.view];
         [self.repoViewController didMoveToParentViewController:self];
+        [self setupPanGesture];
     }
     if (indexPath.row == 1) {
         self.userViewController.view.frame = self.topViewController.view.frame;
@@ -235,6 +231,7 @@
         self.topViewController = self.userViewController;
         [self.view addSubview:self.userViewController.view];
         [self.userViewController didMoveToParentViewController:self];
+        [self setupPanGesture];
     }
 }
 - (IBAction)sideBarButton:(id)sender {
