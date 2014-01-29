@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--Bar Menu Table View Controller - Sidebar-->
+        <!--Bar Menu Table View Controller - Git Rich or Die Tryin'-->
         <scene sceneID="loa-AH-Dib">
             <objects>
                 <tableViewController id="WWP-If-vff" customClass="SFBarMenuTableViewController" sceneMemberID="viewController">
@@ -58,7 +58,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Sidebar" id="vvH-HM-mQy">
+                    <navigationItem key="navigationItem" title="Git Rich or Die Tryin'" id="vvH-HM-mQy">
                         <barButtonItem key="leftBarButtonItem" image="Cheeseburger.png" id="dFH-Y9-PUK">
                             <connections>
                                 <action selector="sideBarButton:" destination="WWP-If-vff" id="b5m-o5-lP3"/>
@@ -79,7 +79,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="OMX-7o-JlO">
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search Repositories" id="OMX-7o-JlO">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>

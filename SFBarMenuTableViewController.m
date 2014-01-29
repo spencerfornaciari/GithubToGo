@@ -42,20 +42,24 @@
     self.userViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubUserCollectionView"];
     [self addChildViewController:self.userViewController];
     self.userViewController.view.frame = self.view.frame;
-    [self.view addSubview:self.userViewController.view];
-    [self.userViewController didMoveToParentViewController:self];
     
-    self.userViewController = (SFUserCollectionController *)self.topViewController;
+
+//    [self.view addSubview:self.userViewController.view];
+//    [self.userViewController didMoveToParentViewController:self];
+    
+    //self.topViewController = self.userViewController;
     
     
     
     //Repo Search controller declaration
-//    self.repoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubReposWebViewController"];
-//    [self addChildViewController:self.repoViewController];
-//    self.repoViewController.view.frame = self.view.frame;
-//    [self.view addSubview:self.repoViewController.view];
-//    [self.repoViewController didMoveToParentViewController:self];
+    self.repoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubReposWebViewController"];
+    [self addChildViewController:self.repoViewController];
+    self.repoViewController.view.frame = self.view.frame;
+    [self.view addSubview:self.repoViewController.view];
+    [self.repoViewController didMoveToParentViewController:self];
     
+    self.topViewController = self.repoViewController;
+
     [self setupPanGesture];
 
     // Uncomment the following line to preserve selection between presentations.
@@ -219,26 +223,22 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
-        NSLog(@"Repos");
+        self.repoViewController.view.frame = self.topViewController.view.frame;
+        [self.topViewController.view removeFromSuperview];
+        self.topViewController = self.repoViewController;
+        [self.view addSubview:self.repoViewController.view];
+        [self.repoViewController didMoveToParentViewController:self];
     }
     if (indexPath.row == 1) {
-        NSLog(@"Users");
-
+        self.userViewController.view.frame = self.topViewController.view.frame;
+        [self.topViewController.view removeFromSuperview];
+        self.topViewController = self.userViewController;
+        [self.view addSubview:self.userViewController.view];
+        [self.userViewController didMoveToParentViewController:self];
     }
-//        self.userViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubUserCollectionView"];
-//        [self addChildViewController:self.userViewController];
-//        self.userViewController.view.frame = self.view.frame;
-//        [self.view addSubview:self.userViewController.view];
-//        [self.userViewController didMoveToParentViewController:self];
-//    } else if ([indexPath isEqual:@1]) {
-//        self.userViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubUserCollectionView"];
-//        [self addChildViewController:self.userViewController];
-//        self.userViewController.view.frame = self.view.frame;
-//        [self.view addSubview:self.userViewController.view];
-//        [self.userViewController didMoveToParentViewController:self];
-    
 }
 - (IBAction)sideBarButton:(id)sender {
+    
     if (!self.isOpen) {
         [self openMenu];
         self.isOpen = YES;

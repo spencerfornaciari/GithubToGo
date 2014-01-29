@@ -39,7 +39,8 @@
                                                  name:@"DownloadedImage"
                                                object:nil];
     
-    self.view.backgroundColor = [UIColor lightGrayColor];
+    self.searchResults = (NSMutableArray *)[[SFNetworkController sharedController] reposForSearchString:@"Joe"];
+
     
 	// Do any additional setup after loading the view.
 }
@@ -58,9 +59,7 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SFUserCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    
-    //cell.backgroundColor = [UIColor redColor];
-    
+        
     GitUser *user = self.gitUsers[indexPath.row];
     
     if (user.photo) {
@@ -69,7 +68,6 @@
         if (!user.isDownloading) {
             [user downloadAvatar];
             user.isDownloading = YES;
-            //customCell.backgroundColor = [UIColor redColor];
         }
     }
     
@@ -122,13 +120,9 @@
         user.name = dictionary[@"login"];
         user.photoLocation = dictionary[@"avatar_url"];
         user.downloadQueue = self.downloadQueue;
-        NSLog(@"%@", user.name);
-        
         [self.gitUsers addObject:user];
     }
-    
-    //NSLog(@"%@", self.gitUsers);
-    [self.userCollectionView reloadData];
+        [self.userCollectionView reloadData];
 }
 
 #pragma mark - NSNotificationCenter Methods
@@ -138,15 +132,11 @@
     id sender = [[note userInfo] objectForKey:@"user"];
     
     if ([sender isKindOfClass:[GitUser class]]) {
-        NSLog(@"Download Finished For User: %@", sender);
         NSIndexPath *userPath = [NSIndexPath indexPathForItem:[_gitUsers indexOfObject:sender] inSection:0];
-        //SFUserCollectionCell *cell = [self.userCollectionView cellForItemAtIndexPath:userPath];
-        //cell.isDownloading = NO;
         [self.userCollectionView reloadItemsAtIndexPaths:@[userPath]];
     } else {
         NSLog(@"Sender was not a GitUser");
     }
 }
-
 
 @end
