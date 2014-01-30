@@ -9,6 +9,7 @@
 #import "SFDetailViewController.h"
 
 @interface SFDetailViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *label;
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
 - (void)configureView;
 @end
@@ -36,15 +37,22 @@
     // Update the user interface for the detail item.
 
     if (self.detailItem) {
+ 
         NSString *htmlURLString = _detailItem[@"html_url"];
+        
+        //[self.view addSubview:label];
+        
         NSLog(@"%@", htmlURLString);
-        [self.detailedWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:htmlURLString]]];
+        NSURL *gitURL = [NSURL URLWithString:htmlURLString];
+        [self.detailedWebView loadRequest:[NSURLRequest requestWithURL:gitURL]];
+        [self.detailedWebView reload];
     }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
 	// Do any additional setup after loading the view, typically from a nib.
     [self configureView];
 }
@@ -53,6 +61,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+
 }
 
 #pragma mark - Split view

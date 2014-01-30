@@ -10,7 +10,7 @@
 
 @class SFDetailViewController;
 
-@interface SFMasterViewController : UITableViewController <UISearchBarDelegate>
+@interface SFMasterViewController : UITableViewController <UISearchBarDelegate, UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) SFDetailViewController *detailViewController;
 

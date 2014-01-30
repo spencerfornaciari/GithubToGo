@@ -34,6 +34,8 @@
     [super viewDidLoad];
     
     self.githubSearchBar.delegate = self;
+    
+    self.detailViewController = [SFDetailViewController new];
     self.searchResults = (NSMutableArray *)[[SFNetworkController sharedController] reposForSearchString:@"iOS"];
 
 }
@@ -131,6 +133,8 @@
 
  */
 
+#pragma mark - 
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
@@ -139,6 +143,27 @@
         [[segue destinationViewController] setDetailItem:repoDict];
     }
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        
+        NSDictionary *repoDict = _searchResults[indexPath.row];
+        self.detailViewController.detailItem = repoDict;
+        //NSLog(@"%@", repoDict[@"html_url"]);
+
+        //NSLog(@"%@", self.detailViewController.detailItem[@"html_url"]);
+    }
+}
+
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+//        NSDate *object = _objects[indexPath.row];
+//        self.detailViewController.detailItem = object;
+//    }
+//}
+
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
@@ -171,5 +196,6 @@
         [self.tableView reloadData];
     }
 }
+
 
 @end

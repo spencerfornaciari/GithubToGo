@@ -164,13 +164,20 @@
     return 2;
 }
 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    self.userViewController.view.frame = self.topViewController.view.frame;
+    [self.userViewController.userCollectionView setNeedsDisplay];
+
+}
+
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    NSLog(@"Did Rotate");
-    self.userViewController.view.frame = self.view.frame;
-//    [self.userViewController.userCollectionView setNeedsUpdateConstraints];
-//    [self.userViewController.userCollectionView reloadData];
-    [self.userViewController.userCollectionView setNeedsDisplay];
+  //  NSLog(@"Did Rotate");
+//    self.userViewController.view.frame = self.view.frame;
+////    [self.userViewController.userCollectionView setNeedsUpdateConstraints];
+////    [self.userViewController.userCollectionView reloadData];
+//    [self.userViewController.userCollectionView setNeedsDisplay];
 }
 /*
 // Override to support conditional editing of the table view.
