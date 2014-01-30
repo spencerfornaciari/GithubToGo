@@ -156,15 +156,6 @@
     }
 }
 
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-//        NSDate *object = _objects[indexPath.row];
-//        self.detailViewController.detailItem = object;
-//    }
-//}
-
-
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     searchBar.keyboardType = UIKeyboardTypeWebSearch;
@@ -181,7 +172,9 @@
     NSError *error;
     
     @try {
-        self.searchResults = (NSMutableArray *)[[SFNetworkController sharedController] usersForSearchString:string];
+        self.searchResults = [NSMutableArray new];
+        self.searchResults = (NSMutableArray *)[[SFNetworkController sharedController] reposForSearchString:string];
+        NSLog(@"%@", self.searchResults[0]);
     }
     @catch (NSException *exception) {
         NSLog(@"API Limit Reached? %@", exception.debugDescription);
