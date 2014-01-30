@@ -17,6 +17,7 @@
 @property (nonatomic) NSMutableArray *gitUsers;
 @property (nonatomic) NSMutableArray *searchResults;
 @property (nonatomic) NSOperationQueue *downloadQueue;
+@property (weak, nonatomic) IBOutlet UISearchBar *githubUserSearchBar;
 
 
 @end
@@ -29,6 +30,7 @@
     [super viewDidLoad];
     self.userCollectionView.delegate = self;
     self.userCollectionView.dataSource = self;
+    self.githubUserSearchBar.delegate = self;
     
     _downloadQueue = [NSOperationQueue new];
     
@@ -82,6 +84,11 @@
     return [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"searchHeader" forIndexPath:indexPath];
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return self.githubUserSearchBar;
+}
+
 #pragma mark - UICollectionView Search Functionality
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
@@ -102,6 +109,7 @@
     
     @try {
         self.searchResults = (NSMutableArray *)[[SFNetworkController sharedController] usersForSearchString:string];
+        NSLog(@"%@", self.searchResults[0]);
     }
     @catch (NSException *exception) {
         NSLog(@"API Limit Reached? %@", exception.debugDescription);
