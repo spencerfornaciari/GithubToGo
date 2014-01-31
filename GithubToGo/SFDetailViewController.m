@@ -9,7 +9,6 @@
 #import "SFDetailViewController.h"
 
 @interface SFDetailViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *label;
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
 - (void)configureView;
 @end
@@ -27,9 +26,9 @@
         [self configureView];
     }
 
-    if (self.masterPopoverController != nil) {
-        [self.masterPopoverController dismissPopoverAnimated:YES];
-    }        
+//    if (self.masterPopoverController != nil) {
+//        [self.masterPopoverController dismissPopoverAnimated:YES];
+//    }        
 }
 
 - (void)configureView
