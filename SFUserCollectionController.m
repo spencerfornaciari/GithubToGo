@@ -43,9 +43,6 @@
                                                  name:@"DownloadedImage"
                                                object:nil];
     
-    //self.searchResults = (NSMutableArray *)[[SFNetworkController sharedController] reposForSearchString:@"Joe"];
-
-    
 	// Do any additional setup after loading the view.
 }
 
@@ -106,14 +103,12 @@
 
 - (void)githubSearch:(NSString *)string
 {
-    NSLog(@"%@", string);
     string = [string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     NSError *error;
     
     @try {
         self.searchResults = (NSMutableArray *)[[SFNetworkController sharedController] usersForSearchString:string];
-        NSLog(@"%@", self.searchResults[0]);
     }
     @catch (NSException *exception) {
         NSLog(@"API Limit Reached? %@", exception.debugDescription);
@@ -139,7 +134,6 @@
         GitUser *user = [GitUser new];
         user.name = dictionary[@"login"];
         user.html_url = dictionary[@"html_url"];
-        //NSLog(@"%@", user.profilePage);
         user.photoLocation = dictionary[@"avatar_url"];
         user.downloadQueue = self.downloadQueue;
         [self.gitUsers addObject:user];

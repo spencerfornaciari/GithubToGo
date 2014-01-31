@@ -9,7 +9,6 @@
 #import "SFReposTableViewController.h"
 #import "SFDetailViewController.h"
 #import "SFNetworkController.h"
-#import "SFWebController.h"
 
 @interface SFReposTableViewController ()
 
@@ -118,19 +117,8 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
- */
-
-#pragma mark - 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -148,6 +136,8 @@
         self.detailViewController.detailItem = repoDict;
     }
 }
+
+#pragma mark - Repo search button clicked
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {

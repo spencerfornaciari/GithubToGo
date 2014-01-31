@@ -36,36 +36,11 @@
     // Update the user interface for the detail item.
 
     if (self.detailItem) {
-    
-    //NSLog(@"%@", self.detailItem);
- 
         NSString *htmlURLString = _detailItem[@"html_url"];
-        
-        
-        NSLog(@"%@", htmlURLString);
         NSURL *gitURL = [NSURL URLWithString:htmlURLString];
         [self.detailWebView loadRequest:[NSURLRequest requestWithURL:gitURL]];
+        self.detailWebView.delegate = self;
     }
-        //[self.detailWebView setBackgroundColor:[UIColor redColor]];
-        //self.detailWebView.backgroundColor = [UIColor redColor];
-         //[self.view addSubview:self.detailedWebView];
-//        [self.view reloadData];
-//        _newView.view.frame = self.view.frame;
-    
-    //newView.view.backgroundColor = [UIColor redColor];
-    
-        //self.repoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubReposWebViewController"];
-        //[self addChildViewController:newView];
-//        [self.view addSubview:newView.view];
-//        [newView.view addSubview:self.detailWebView];
-//        [self.detailWebView reload];
-        //[newView didMoveToParentViewController:self];
-        
-
-       // self.topViewController = newView;
-        
-      // [self presentViewController:newView animated:YES completion:nil];
-   // }
 }
 
 - (void)viewDidLoad
@@ -82,11 +57,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-
-}
-
 #pragma mark - Split view
 
 - (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
@@ -101,6 +71,19 @@
     // Called when the view is shown again in the split view, invalidating the button and popover controller.
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
     self.masterPopoverController = nil;
+}
+
+//With help from StackOverflow (http://stackoverflow.com/questions/10666484/html-content-fit-in-uiwebview-without-zooming-out)
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    CGSize contentSize = webView.scrollView.contentSize;
+    CGSize viewSize = self.view.bounds.size;
+    
+    float reducedWidth = viewSize.width / contentSize.width;
+    
+    webView.scrollView.minimumZoomScale = reducedWidth;
+    webView.scrollView.maximumZoomScale = reducedWidth;
+    webView.scrollView.zoomScale = reducedWidth;
 }
 
 @end

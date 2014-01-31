@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SFDetailViewController : UIViewController <UISplitViewControllerDelegate>
+@interface SFDetailViewController : UIViewController <UISplitViewControllerDelegate, UIWebViewDelegate>
 
 @property (strong, nonatomic) id detailItem;
 

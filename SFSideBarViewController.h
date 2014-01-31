@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SFDetailViewController.h"
 
-@interface SFBarMenuTableViewController : UITableViewController <UIGestureRecognizerDelegate>
+@interface SFSideBarViewController : UITableViewController <UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) SFDetailViewController *detailViewController;
 
