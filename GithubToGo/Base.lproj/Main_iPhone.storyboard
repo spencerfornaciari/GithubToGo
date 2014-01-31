@@ -144,7 +144,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Detail" id="cra-N8-TIN"/>
                     <connections>
-                        <outlet property="detailedWebView" destination="mIx-lj-06I" id="eAp-f3-ceE"/>
+                        <outlet property="detailWebView" destination="mIx-lj-06I" id="b2i-wi-J4Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lrm-kH-fPn" sceneMemberID="firstResponder"/>
@@ -269,6 +269,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="eVO-j5-Bjc"/>
+        <segue reference="E8A-9o-F4a"/>
     </inferredMetricsTieBreakers>
 </document>

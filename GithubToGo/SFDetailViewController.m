@@ -26,9 +26,9 @@
         [self configureView];
     }
 
-//    if (self.masterPopoverController != nil) {
-//        [self.masterPopoverController dismissPopoverAnimated:YES];
-//    }        
+    if (self.masterPopoverController != nil) {
+        [self.masterPopoverController dismissPopoverAnimated:YES];
+    }        
 }
 
 - (void)configureView
@@ -36,16 +36,36 @@
     // Update the user interface for the detail item.
 
     if (self.detailItem) {
+    
+    //NSLog(@"%@", self.detailItem);
  
         NSString *htmlURLString = _detailItem[@"html_url"];
         
-        //[self.view addSubview:label];
         
         NSLog(@"%@", htmlURLString);
         NSURL *gitURL = [NSURL URLWithString:htmlURLString];
-        [self.detailedWebView loadRequest:[NSURLRequest requestWithURL:gitURL]];
-        [self.detailedWebView reload];
+        [self.detailWebView loadRequest:[NSURLRequest requestWithURL:gitURL]];
     }
+        //[self.detailWebView setBackgroundColor:[UIColor redColor]];
+        //self.detailWebView.backgroundColor = [UIColor redColor];
+         //[self.view addSubview:self.detailedWebView];
+//        [self.view reloadData];
+//        _newView.view.frame = self.view.frame;
+    
+    //newView.view.backgroundColor = [UIColor redColor];
+    
+        //self.repoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubReposWebViewController"];
+        //[self addChildViewController:newView];
+//        [self.view addSubview:newView.view];
+//        [newView.view addSubview:self.detailWebView];
+//        [self.detailWebView reload];
+        //[newView didMoveToParentViewController:self];
+        
+
+       // self.topViewController = newView;
+        
+      // [self presentViewController:newView animated:YES completion:nil];
+   // }
 }
 
 - (void)viewDidLoad

@@ -17,6 +17,8 @@
 @property (nonatomic) NSMutableArray *gitUsers;
 @property (nonatomic) NSMutableArray *searchResults;
 @property (nonatomic) NSOperationQueue *downloadQueue;
+@property (nonatomic) SFDetailViewController *detailViewController;
+
 @property (weak, nonatomic) IBOutlet UISearchBar *githubUserSearchBar;
 
 
@@ -31,6 +33,8 @@
     self.userCollectionView.delegate = self;
     self.userCollectionView.dataSource = self;
     self.githubUserSearchBar.delegate = self;
+    
+    self.detailViewController = (SFDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     
     _downloadQueue = [NSOperationQueue new];
     
@@ -163,6 +167,14 @@
         NSIndexPath *indexPath = [self.userCollectionView indexPathForCell:(SFUserCollectionCell *)sender];
         NSDictionary *repoDict = _searchResults[indexPath.row];
        [[segue destinationViewController] setDetailItem:repoDict];
+    }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        NSDictionary *userDict = _searchResults[indexPath.row];
+        self.detailViewController.detailItem = userDict;
     }
 }
 

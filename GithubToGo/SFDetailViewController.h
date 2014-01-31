@@ -12,5 +12,7 @@
 
 @property (strong, nonatomic) id detailItem;
 
-@property (weak, nonatomic) IBOutlet UIWebView *detailedWebView;
+@property (weak, nonatomic) IBOutlet UIWebView *detailWebView;
+//@property (weak, nonatomic) UIViewController *newView;
+
 @end

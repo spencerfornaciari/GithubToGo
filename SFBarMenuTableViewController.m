@@ -38,7 +38,7 @@
     [super viewDidLoad];
     
     self.isOpen = NO;
-    
+        
     //Repo Search controller declaration
     self.repoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubReposWebViewController"];
     [self addChildViewController:self.repoViewController];
@@ -53,9 +53,11 @@
     self.userViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubUserCollectionView"];
     [self addChildViewController:self.userViewController];
     self.userViewController.view.frame = self.view.frame;
+    [self.userViewController didMoveToParentViewController:self];
 
+    //self.userViewController.view.frame = self.
     
-
+   
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -171,14 +173,7 @@
 
 }
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-  //  NSLog(@"Did Rotate");
-//    self.userViewController.view.frame = self.view.frame;
-////    [self.userViewController.userCollectionView setNeedsUpdateConstraints];
-////    [self.userViewController.userCollectionView reloadData];
-//    [self.userViewController.userCollectionView setNeedsDisplay];
-}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -237,7 +232,6 @@
         [self.topViewController.view removeFromSuperview];
         self.topViewController = self.repoViewController;
         [self.view addSubview:self.repoViewController.view];
-        [self.repoViewController didMoveToParentViewController:self];
         [self setupPanGesture];
         self.isOpen = NO;
         [self closeMenu];
@@ -247,7 +241,6 @@
         [self.topViewController.view removeFromSuperview];
         self.topViewController = self.userViewController;
         [self.view addSubview:self.userViewController.view];
-        [self.userViewController didMoveToParentViewController:self];
         [self setupPanGesture];
         self.isOpen = NO;
         [self closeMenu];

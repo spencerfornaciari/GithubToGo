@@ -9,6 +9,7 @@
 #import "SFReposTableViewController.h"
 #import "SFDetailViewController.h"
 #import "SFNetworkController.h"
+#import "SFWebController.h"
 
 @interface SFReposTableViewController ()
 
@@ -35,7 +36,8 @@
     
     self.githubSearchBar.delegate = self;
     
-    self.detailViewController = [SFDetailViewController new];
+    self.detailViewController = (SFDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+
     self.searchResults = (NSMutableArray *)[[SFNetworkController sharedController] reposForSearchString:@"iOS"];
 
 }
@@ -142,12 +144,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        
         NSDictionary *repoDict = _searchResults[indexPath.row];
         self.detailViewController.detailItem = repoDict;
-        //NSLog(@"%@", repoDict[@"html_url"]);
-
-        //NSLog(@"%@", self.detailViewController.detailItem[@"html_url"]);
     }
 }
 
