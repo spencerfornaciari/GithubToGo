@@ -24,7 +24,10 @@
 		8934E7F11896CFD200854DC8 /* GithubToGoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8934E7F01896CFD200854DC8 /* GithubToGoTests.m */; };
 		8934E7FC1896D30400854DC8 /* SFNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8934E7FB1896D30400854DC8 /* SFNetworkController.m */; };
 		8934E7FF1896FD4100854DC8 /* SFReposTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8934E7FE1896FD4100854DC8 /* SFReposTableViewController.m */; };
-		89EA254218985580006ADEB6 /* SFSideBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89EA254118985580006ADEB6 /* SFSideBarViewController.m */; };
+		89A43F3918AA9528009DC814 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A43F3818AA9528009DC814 /* CoreData.framework */; };
+		89A43F3C18AA999E009DC814 /* GithubToGo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 89A43F3A18AA999E009DC814 /* GithubToGo.xcdatamodeld */; };
+		89A43F3F18AA9C19009DC814 /* Repo.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A43F3E18AA9C19009DC814 /* Repo.m */; };
+		89EA254218985580006ADEB6 /* SFMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89EA254118985580006ADEB6 /* SFMasterViewController.m */; };
 		89EA254518985A51006ADEB6 /* SFUserCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89EA254418985A51006ADEB6 /* SFUserCollectionController.m */; };
 		89EA254C1898635F006ADEB6 /* Cheeseburger@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89EA254A1898635F006ADEB6 /* Cheeseburger@2x.png */; };
 		89EA254F18986377006ADEB6 /* Cheeseburger.png in Resources */ = {isa = PBXBuildFile; fileRef = 89EA254E18986377006ADEB6 /* Cheeseburger.png */; };
@@ -67,8 +70,12 @@
 		8934E7FB1896D30400854DC8 /* SFNetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFNetworkController.m; sourceTree = "<group>"; };
 		8934E7FD1896FD4100854DC8 /* SFReposTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFReposTableViewController.h; sourceTree = "<group>"; };
 		8934E7FE1896FD4100854DC8 /* SFReposTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFReposTableViewController.m; sourceTree = "<group>"; };
-		89EA254018985580006ADEB6 /* SFSideBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSideBarViewController.h; sourceTree = "<group>"; };
-		89EA254118985580006ADEB6 /* SFSideBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSideBarViewController.m; sourceTree = "<group>"; };
+		89A43F3818AA9528009DC814 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		89A43F3B18AA999E009DC814 /* GithubToGo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GithubToGo.xcdatamodel; sourceTree = "<group>"; };
+		89A43F3D18AA9C19009DC814 /* Repo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Repo.h; path = ../Repo.h; sourceTree = "<group>"; };
+		89A43F3E18AA9C19009DC814 /* Repo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Repo.m; path = ../Repo.m; sourceTree = "<group>"; };
+		89EA254018985580006ADEB6 /* SFMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFMasterViewController.h; sourceTree = "<group>"; };
+		89EA254118985580006ADEB6 /* SFMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFMasterViewController.m; sourceTree = "<group>"; };
 		89EA254318985A51006ADEB6 /* SFUserCollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFUserCollectionController.h; sourceTree = "<group>"; };
 		89EA254418985A51006ADEB6 /* SFUserCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFUserCollectionController.m; sourceTree = "<group>"; };
 		89EA254A1898635F006ADEB6 /* Cheeseburger@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cheeseburger@2x.png"; sourceTree = "<group>"; };
@@ -84,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89A43F3918AA9528009DC814 /* CoreData.framework in Frameworks */,
 				8934E7C21896CFD200854DC8 /* CoreGraphics.framework in Frameworks */,
 				8934E7C41896CFD200854DC8 /* UIKit.framework in Frameworks */,
 				8934E7C01896CFD200854DC8 /* Foundation.framework in Frameworks */,
@@ -125,6 +133,7 @@
 		8934E7BE1896CFD200854DC8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				89A43F3818AA9528009DC814 /* CoreData.framework */,
 				8934E7BF1896CFD200854DC8 /* Foundation.framework */,
 				8934E7C11896CFD200854DC8 /* CoreGraphics.framework */,
 				8934E7C31896CFD200854DC8 /* UIKit.framework */,
@@ -136,6 +145,7 @@
 		8934E7C51896CFD200854DC8 /* GithubToGo */ = {
 			isa = PBXGroup;
 			children = (
+				89A43F3A18AA999E009DC814 /* GithubToGo.xcdatamodeld */,
 				89EA25531898691D006ADEB6 /* Controller */,
 				89EA255218986915006ADEB6 /* View */,
 				89EA25511898690A006ADEB6 /* Model */,
@@ -191,6 +201,8 @@
 		89EA25511898690A006ADEB6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				89A43F3D18AA9C19009DC814 /* Repo.h */,
+				89A43F3E18AA9C19009DC814 /* Repo.m */,
 				89EA255718986B47006ADEB6 /* GitUser.h */,
 				89EA255818986B47006ADEB6 /* GitUser.m */,
 			);
@@ -214,8 +226,8 @@
 				8934E7DB1896CFD200854DC8 /* SFDetailViewController.m */,
 				89EA254318985A51006ADEB6 /* SFUserCollectionController.h */,
 				89EA254418985A51006ADEB6 /* SFUserCollectionController.m */,
-				89EA254018985580006ADEB6 /* SFSideBarViewController.h */,
-				89EA254118985580006ADEB6 /* SFSideBarViewController.m */,
+				89EA254018985580006ADEB6 /* SFMasterViewController.h */,
+				89EA254118985580006ADEB6 /* SFMasterViewController.m */,
 				8934E7FD1896FD4100854DC8 /* SFReposTableViewController.h */,
 				8934E7FE1896FD4100854DC8 /* SFReposTableViewController.m */,
 				8934E7FA1896D30400854DC8 /* SFNetworkController.h */,
@@ -326,10 +338,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89A43F3F18AA9C19009DC814 /* Repo.m in Sources */,
 				8934E7FC1896D30400854DC8 /* SFNetworkController.m in Sources */,
+				89A43F3C18AA999E009DC814 /* GithubToGo.xcdatamodeld in Sources */,
 				8934E7CC1896CFD200854DC8 /* main.m in Sources */,
 				89EA255918986B47006ADEB6 /* GitUser.m in Sources */,
-				89EA254218985580006ADEB6 /* SFSideBarViewController.m in Sources */,
+				89EA254218985580006ADEB6 /* SFMasterViewController.m in Sources */,
 				8934E7DC1896CFD200854DC8 /* SFDetailViewController.m in Sources */,
 				8934E7D01896CFD200854DC8 /* SFAppDelegate.m in Sources */,
 				8934E7FF1896FD4100854DC8 /* SFReposTableViewController.m in Sources */,
@@ -565,6 +579,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		89A43F3A18AA999E009DC814 /* GithubToGo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				89A43F3B18AA999E009DC814 /* GithubToGo.xcdatamodel */,
+			);
+			currentVersion = 89A43F3B18AA999E009DC814 /* GithubToGo.xcdatamodel */;
+			path = GithubToGo.xcdatamodeld;
+			sourceTree = SOURCE_ROOT;
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 8934E7B41896CFD200854DC8 /* Project object */;
 }

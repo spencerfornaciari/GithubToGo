@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--Side Bar View Controller - Git Rich or Die Tryin'-->
+        <!--Master View Controller - Git Rich or Die Tryin'-->
         <scene sceneID="loa-AH-Dib">
             <objects>
-                <tableViewController id="WWP-If-vff" customClass="SFSideBarViewController" sceneMemberID="viewController">
+                <tableViewController id="WWP-If-vff" customClass="SFMasterViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="Cell" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ksh-hB-UxM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -16,7 +16,7 @@
                             <tableViewSection id="oYB-cM-5OP">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="DGt-SV-kg2" style="IBUITableViewCellStyleDefault" id="0hR-E4-DSn">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0hR-E4-DSn" id="AyL-Rh-7af">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -33,7 +33,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="pNv-cW-Wze" style="IBUITableViewCellStyleDefault" id="kOb-lQ-LwT">
-                                        <rect key="frame" x="0.0" y="44" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="108" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kOb-lQ-LwT" id="7KZ-iH-KK8">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -269,6 +269,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="E8A-9o-F4a"/>
+        <segue reference="eVO-j5-Bjc"/>
     </inferredMetricsTieBreakers>
 </document>

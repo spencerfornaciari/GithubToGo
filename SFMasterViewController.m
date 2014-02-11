@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Spencer Fornaciari. All rights reserved.
 //
 
-#import "SFSideBarViewController.h"
+#import "SFMasterViewController.h"
 #import "SFReposTableViewController.h"
 #import "SFUserCollectionController.h"
 
-@interface SFSideBarViewController ()
+@interface SFMasterViewController ()
 
 @property (nonatomic) SFReposTableViewController *repoViewController;
 @property (nonatomic) SFUserCollectionController *userViewController;
@@ -22,7 +22,7 @@
 
 @end
 
-@implementation SFSideBarViewController
+@implementation SFMasterViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -73,10 +73,10 @@
     pan.maximumNumberOfTouches = 1;
     
     pan.delegate = self;
-    
-    [self.topViewController.view addGestureRecognizer:pan];
-    //[self.repoViewController.view addGestureRecognizer:pan];
-    //[self.userViewController.view addGestureRecognizer:pan];
+    pan.delaysTouchesBegan = NO;
+    pan.delaysTouchesEnded = NO;
+
+    [self.view addGestureRecognizer:pan];
     
 }
 

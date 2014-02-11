@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "SFDetailViewController.h"
 
-@interface SFSideBarViewController : UITableViewController <UIGestureRecognizerDelegate>
+@interface SFMasterViewController : UITableViewController <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) SFDetailViewController *detailViewController;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 @end

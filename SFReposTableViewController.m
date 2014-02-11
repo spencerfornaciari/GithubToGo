@@ -7,13 +7,11 @@
 //
 
 #import "SFReposTableViewController.h"
-#import "SFDetailViewController.h"
 #import "SFNetworkController.h"
 
 @interface SFReposTableViewController ()
 
 @property (nonatomic) NSMutableArray *searchResults;
-@property (nonatomic) SFDetailViewController *detailViewController;
 @property (strong, nonatomic) IBOutlet UISearchBar *githubSearchBar;
 
 @end
@@ -33,10 +31,14 @@
 {
     [super viewDidLoad];
     
+    SFAppDelegate *appDelegate = (SFAppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.managedObjectContext = appDelegate.managedObjectContext;
+    
     self.githubSearchBar.delegate = self;
     
     self.detailViewController = (SFDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
-
+    
+    NSLog(@"Managed: %@", self.managedObjectContext);
     self.searchResults = (NSMutableArray *)[[SFNetworkController sharedController] reposForSearchString:@"iOS"];
 
 }
@@ -64,7 +66,11 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return self.searchResults.count;
+    
+    id<NSFetchedResultsSectionInfo>sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
+    
+//    return self.searchResults.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -73,9 +79,16 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-    cell.textLabel.text = [self.searchResults[indexPath.row] objectForKey:@"name"];
-
+\
+    [self configureCell:cell atIndexPath:indexPath];
+    
     return cell;
+}
+
+-(void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = [object valueForKey:@"name"];
 }
 
 /*
@@ -123,9 +136,10 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDictionary *repoDict = _searchResults[indexPath.row];
-        [[segue destinationViewController] setDetailItem:repoDict];
+//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+//        NSDictionary *repoDict = _searchResults[indexPath.row];
+//        [[segue destinationViewController] setDetailItem:repoDict];
+        NSLog(@"Log");
     }
 }
 
@@ -143,7 +157,7 @@
 {
     searchBar.keyboardType = UIKeyboardTypeWebSearch;
     
-    [searchBar resignFirstResponder];
+   [searchBar resignFirstResponder];
     [self githubSearch:searchBar.text];
 }
 
@@ -153,7 +167,7 @@
     string = [string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     NSError *error;
-    
+
     @try {
         self.searchResults = [NSMutableArray new];
         self.searchResults = (NSMutableArray *)[[SFNetworkController sharedController] reposForSearchString:string];
@@ -166,12 +180,95 @@
         }
     }
     
-    if (self.searchResults == nil) {
+    for (NSDictionary *dictonary in self.searchResults) {
+        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Repo" inManagedObjectContext:self.managedObjectContext];
+        Repo *repo = [[Repo alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:self.managedObjectContext withJsonDictionary:dictonary];
         
-    } else {
-        [self.tableView reloadData];
+    }
+    
+    
+//    if (self.searchResults == nil) {
+//        
+//    } else {
+//        [self.tableView reloadData];
+//    }
+}
+
+-(NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController) {
+        return _fetchedResultsController;
+    }
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Repo" inManagedObjectContext:self.managedObjectContext];
+    
+    request.entity = entityDescription;
+    request.fetchBatchSize = 25;
+    
+    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    
+    request.sortDescriptors = @[descriptor];
+    
+    NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Repo"];
+    
+    fetchedResultsController.delegate = self;
+    self.fetchedResultsController = fetchedResultsController;
+    
+    NSError *error;
+    [self.fetchedResultsController performFetch:&error];
+    
+    if (error) {
+        NSLog(@"Fetch error: %@", error);
+    }
+    
+    return _fetchedResultsController;
+}
+
+#pragma mark - FetchedResultsControllerDelegate Method
+
+-(void)controller:(NSFetchedResultsController *)controller didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
+{
+    switch (type) {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+             break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];            break;
     }
 }
 
+-(void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+{
+    UITableView *tableView = self.tableView;
+    
+    switch (type) {
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        
+    }
+}
+
+-(void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView beginUpdates];
+}
+
+-(void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView endUpdates];
+}
 
 @end

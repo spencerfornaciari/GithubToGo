@@ -18,6 +18,6 @@
 
 @property (nonatomic, weak) NSOperationQueue *downloadQueue;
 
--(void)downloadAvatar;
+-(void)downloadAvatar:(void (^)(UIImage *pic))callbackImage;
 
 @end

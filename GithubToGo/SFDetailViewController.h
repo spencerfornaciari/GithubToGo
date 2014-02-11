@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Repo.h"
 
 @interface SFDetailViewController : UIViewController <UISplitViewControllerDelegate, UIWebViewDelegate>
 

@@ -17,18 +17,20 @@
     return self;
 }
 
--(void)downloadAvatar
+-(void)downloadAvatar:(void (^)(UIImage *pic))callbackImage;
 {
     _isDownloading = TRUE;
     
     [_downloadQueue addOperationWithBlock:^{
         NSURL *avatarURL = [NSURL URLWithString:self.photoLocation];
         NSData *avatarData = [NSData dataWithContentsOfURL:avatarURL];
-        self.photo = [UIImage imageWithData:avatarData];
+        UIImage *avatarImage = [UIImage imageWithData:avatarData];
         
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"DownloadedImage" object:nil userInfo:@{@"user": self}];
-        }];
+        callbackImage(avatarImage);
+        
+//        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"DownloadedImage" object:nil userInfo:@{@"user": self}];
+//        }];
     }];
     
 }

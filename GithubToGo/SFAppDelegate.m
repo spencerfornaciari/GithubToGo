@@ -8,8 +8,13 @@
 
 #import "SFAppDelegate.h"
 #import "SFNetworkController.h"
+#import "SFMasterViewController.h"
 
 @implementation SFAppDelegate
+
+@synthesize managedObjectContext = _managedObjectContext;
+@synthesize managedObjectModel = _managedObjectModel;
+@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -18,8 +23,15 @@
         UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
         UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
         splitViewController.delegate = (id)navigationController.topViewController;
+        
+        UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
+        SFMasterViewController *controller = (SFMasterViewController *)masterNavigationController.topViewController;
+        controller.managedObjectContext = self.managedObjectContext;
+    } else {
+        UINavigationController *masterNavigationController = (UINavigationController *)self.window.rootViewController;
+        SFMasterViewController *controller = (SFMasterViewController *)masterNavigationController.topViewController;
+        controller.managedObjectContext = self.managedObjectContext;
     }
-    
  
     return YES;
 }
@@ -49,6 +61,77 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [self saveContext];
+}
+
+-(void)saveContext
+{
+    NSManagedObjectContext *context = self.managedObjectContext;
+    
+    NSError *error;
+    if (context && [context hasChanges]) {
+        
+        
+        [context save:&error];
+        
+        if (error) {
+            NSLog(@"Error: %@", error);
+        }
+    }
+}
+
+-(NSURL *)applicationDocumentsDirectory
+{
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+-(NSManagedObjectContext *)managedObjectContext
+{
+    if (_managedObjectContext) { //managedObjectContaxt != nil
+        return _managedObjectContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (coordinator) { //coordinator != nil
+        _managedObjectContext = [[NSManagedObjectContext alloc] init];
+        [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+    }
+    
+    return _managedObjectContext;
+}
+
+-(NSPersistentStoreCoordinator *)persistentStoreCoordinator
+{
+    if (_persistentStoreCoordinator) {
+        return _persistentStoreCoordinator;
+    }
+    
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"GithubToGo.sqlite"];
+    NSError *error = nil;
+    
+    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+        
+        if (error)
+        {
+            NSLog(@"Error: %@", error);
+        }
+    }
+    
+    return _persistentStoreCoordinator;
+}
+
+-(NSManagedObjectModel *)managedObjectModel
+{
+    if (_managedObjectModel) {
+        return _managedObjectModel;
+    }
+    
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"GithubToGo" withExtension:@"momd"];
+    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    
+    return _managedObjectModel;
 }
 
 @end

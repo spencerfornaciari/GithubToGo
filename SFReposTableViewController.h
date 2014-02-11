@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SFDetailViewController.h"
+#import "SFAppDelegate.h"
+#import "Repo.h"
 
-@interface SFReposTableViewController : UITableViewController <UIGestureRecognizerDelegate, UISearchBarDelegate>
+@interface SFReposTableViewController : UITableViewController <UIGestureRecognizerDelegate, UISearchBarDelegate, NSFetchedResultsControllerDelegate>
+
+@property (strong, nonatomic) SFDetailViewController *detailViewController;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 @end

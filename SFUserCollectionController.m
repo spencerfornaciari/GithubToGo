@@ -71,7 +71,11 @@
         cell.userProfileImage.image = user.photo;
     } else {
         if (!user.isDownloading) {
-            [user downloadAvatar];
+            [user downloadAvatar:^(UIImage *pic) {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    cell.userProfileImage.image = pic;
+                }];
+            }];
             user.isDownloading = YES;
         }
     }
