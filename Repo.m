@@ -13,6 +13,7 @@
 
 @dynamic name;
 @dynamic html_url;
+@dynamic repo_id;
 
 -(id)initWithEntity:(NSEntityDescription *)entity insertIntoManagedObjectContext:(NSManagedObjectContext *)context withJsonDictionary:(NSDictionary *)json{
     self = [super initWithEntity:entity insertIntoManagedObjectContext:context];
@@ -28,6 +29,7 @@
 {
     self.name = [json objectForKey:@"name"];
     self.html_url = [json objectForKey:@"html_url"];
+    self.repo_id = [NSString stringWithFormat:@"%@",[json objectForKey:@"id"]];
     
     [self.managedObjectContext save:nil];
 }

@@ -161,6 +161,34 @@
     [self githubSearch:searchBar.text];
 }
 
+- (void)findExistingRepos:(NSDictionary *)dictionary withExistingID:(NSString *)repoID
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Repo" inManagedObjectContext:self.managedObjectContext]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"repo_id == %@", repoID]];
+    
+    NSSortDescriptor *sortID = [[NSSortDescriptor alloc] initWithKey:@"repo_id" ascending:YES];
+    [fetchRequest setSortDescriptors:@[sortID]];
+    
+    NSError *error;
+    
+    NSArray *array = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (array.count > 0) {
+        NSLog(@"EXISTS");
+    } else {
+        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Repo" inManagedObjectContext:self.managedObjectContext];
+        Repo *repo = [[Repo alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:self.managedObjectContext withJsonDictionary:dictionary];
+    }
+    
+}
+
+- (void)findOrCreate
+{
+    for (NSDictionary *dictonary in self.searchResults) {
+        [self findExistingRepos:dictonary withExistingID:[dictonary objectForKey:@"id"]];
+    }
+}
+
 - (void)githubSearch:(NSString *)string
 {
     NSLog(@"%@", string);
@@ -180,19 +208,10 @@
         }
     }
     
-    for (NSDictionary *dictonary in self.searchResults) {
-        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Repo" inManagedObjectContext:self.managedObjectContext];
-        Repo *repo = [[Repo alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:self.managedObjectContext withJsonDictionary:dictonary];
-        
-    }
-    
-    
-//    if (self.searchResults == nil) {
-//        
-//    } else {
-//        [self.tableView reloadData];
-//    }
+    [self findOrCreate];
 }
+
+
 
 -(NSFetchedResultsController *)fetchedResultsController
 {

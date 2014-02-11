@@ -43,7 +43,6 @@
     self.repoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubReposWebViewController"];
     [self addChildViewController:self.repoViewController];
     self.repoViewController.view.frame = self.view.frame;
-    NSLog(@"%f", self.repoViewController.view.frame.size.height);
 
     [self.view addSubview:self.repoViewController.view];
     [self.repoViewController didMoveToParentViewController:self];
@@ -55,7 +54,6 @@
     self.userViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubUserCollectionView"];
     [self addChildViewController:self.userViewController];
     self.userViewController.view.frame = self.view.frame;
-    NSLog(@"%f", self.userViewController.view.frame.size.height);
     [self.userViewController didMoveToParentViewController:self];
    
     // Uncomment the following line to preserve selection between presentations.
@@ -77,7 +75,6 @@
     pan.delaysTouchesEnded = NO;
 
     [self.view addGestureRecognizer:pan];
-    
 }
 
 -(void)slidePanel:(id)sender
