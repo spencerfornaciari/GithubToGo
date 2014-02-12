@@ -19,6 +19,6 @@
 - (void)beginOAuthAccess;
 - (BOOL)checkOAuthStatus;
 - (void)handleCallbackURL:(NSURL *)url;
-
+- (NSArray *)fetchUsersReposWithAccessToken:(NSString *)token;
 
 @end

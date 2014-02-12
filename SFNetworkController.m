@@ -88,21 +88,25 @@
     [[NSUserDefaults standardUserDefaults] setObject:self.accessToken forKey:@"accessToken"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    [self fetchUsersRepos];
-    
 }
 
--(void)fetchUsersRepos
+-(NSArray *)fetchUsersReposWithAccessToken:(NSString *)token
 {
-    NSString *stringURL = [NSString stringWithFormat:@"https://api.github.com/user/repos?access_token=%@", self.accessToken];
+    NSString *stringURL = [NSString stringWithFormat:@"https://api.github.com/user/repos?access_token=%@", token];
     
     NSURL *myURL = [NSURL URLWithString:stringURL];
     NSData *responseData = [NSData dataWithContentsOfURL:myURL];
     
-    NSError *error;
-    NSMutableDictionary *repoDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+    NSLog(@"%@", myURL);
     
-    NSLog(@"%@",repoDictionary);
+    NSError *error;
+    
+    NSArray *repoArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+
+    //NSMutableDictionary *repoDictionary
+    NSLog(@"%@",repoArray);
+    
+    return repoArray;
 
 }
 
@@ -135,6 +139,18 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:myURL]];
     
     return TRUE;
+}
+
+-(void)createRepo:(NSString *)repoName withDescription:(NSString *)repoDescription
+{
+//    repoName = [repoName]
+//    
+//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+//    [request setURL:[NSURL URLWithString:@"https://api.github.com/user/repos/%@", repoName]];
+//    [request setHTTPMethod:@"POST"];
+//    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+//    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//    [request setHTTPBody:postData];
 }
 
 @end

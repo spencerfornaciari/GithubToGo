@@ -27,6 +27,7 @@
 		89A43F3918AA9528009DC814 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A43F3818AA9528009DC814 /* CoreData.framework */; };
 		89A43F3C18AA999E009DC814 /* GithubToGo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 89A43F3A18AA999E009DC814 /* GithubToGo.xcdatamodeld */; };
 		89A43F3F18AA9C19009DC814 /* Repo.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A43F3E18AA9C19009DC814 /* Repo.m */; };
+		89B98A9018AC239D006FF961 /* SFMyRepoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B98A8F18AC239D006FF961 /* SFMyRepoTableViewController.m */; };
 		89EA254218985580006ADEB6 /* SFMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89EA254118985580006ADEB6 /* SFMasterViewController.m */; };
 		89EA254518985A51006ADEB6 /* SFUserCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89EA254418985A51006ADEB6 /* SFUserCollectionController.m */; };
 		89EA254C1898635F006ADEB6 /* Cheeseburger@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89EA254A1898635F006ADEB6 /* Cheeseburger@2x.png */; };
@@ -74,6 +75,8 @@
 		89A43F3B18AA999E009DC814 /* GithubToGo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GithubToGo.xcdatamodel; sourceTree = "<group>"; };
 		89A43F3D18AA9C19009DC814 /* Repo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Repo.h; path = ../Repo.h; sourceTree = "<group>"; };
 		89A43F3E18AA9C19009DC814 /* Repo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Repo.m; path = ../Repo.m; sourceTree = "<group>"; };
+		89B98A8E18AC239D006FF961 /* SFMyRepoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFMyRepoTableViewController.h; sourceTree = "<group>"; };
+		89B98A8F18AC239D006FF961 /* SFMyRepoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFMyRepoTableViewController.m; sourceTree = "<group>"; };
 		89EA254018985580006ADEB6 /* SFMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFMasterViewController.h; sourceTree = "<group>"; };
 		89EA254118985580006ADEB6 /* SFMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFMasterViewController.m; sourceTree = "<group>"; };
 		89EA254318985A51006ADEB6 /* SFUserCollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFUserCollectionController.h; sourceTree = "<group>"; };
@@ -222,6 +225,8 @@
 		89EA25531898691D006ADEB6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				89B98A8E18AC239D006FF961 /* SFMyRepoTableViewController.h */,
+				89B98A8F18AC239D006FF961 /* SFMyRepoTableViewController.m */,
 				8934E7DA1896CFD200854DC8 /* SFDetailViewController.h */,
 				8934E7DB1896CFD200854DC8 /* SFDetailViewController.m */,
 				89EA254318985A51006ADEB6 /* SFUserCollectionController.h */,
@@ -343,6 +348,7 @@
 				89A43F3C18AA999E009DC814 /* GithubToGo.xcdatamodeld in Sources */,
 				8934E7CC1896CFD200854DC8 /* main.m in Sources */,
 				89EA255918986B47006ADEB6 /* GitUser.m in Sources */,
+				89B98A9018AC239D006FF961 /* SFMyRepoTableViewController.m in Sources */,
 				89EA254218985580006ADEB6 /* SFMasterViewController.m in Sources */,
 				8934E7DC1896CFD200854DC8 /* SFDetailViewController.m in Sources */,
 				8934E7D01896CFD200854DC8 /* SFAppDelegate.m in Sources */,

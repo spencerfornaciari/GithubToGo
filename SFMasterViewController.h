@@ -14,9 +14,9 @@
 @property (strong, nonatomic) SFDetailViewController *detailViewController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *loginButton;
 
-- (IBAction)loginAction:(id)sender;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *addButton;
+
 @property (nonatomic) BOOL loggedIn;
 
 @end

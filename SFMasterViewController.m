@@ -7,18 +7,21 @@
 //
 
 #import "SFMasterViewController.h"
+#import "SFMyRepoTableViewController.h"
 #import "SFReposTableViewController.h"
 #import "SFUserCollectionController.h"
 #import "SFNetworkController.h"
 
 @interface SFMasterViewController ()
 
+@property (nonatomic) SFMyRepoTableViewController *myRepoViewController;
 @property (nonatomic) SFReposTableViewController *repoViewController;
 @property (nonatomic) SFUserCollectionController *userViewController;
 @property (nonatomic) UIViewController *topViewController;
 @property (weak, nonatomic) SFAppDelegate *appDelegate;
 @property (strong, nonatomic) SFNetworkController *networkController;
 
+@property (strong, nonatomic) IBOutlet UITableViewCell *loginButton;
 @property (nonatomic) BOOL isOpen;
 
 - (IBAction)sideBarButton:(id)sender;
@@ -49,23 +52,32 @@
     //[self.networkController checkOAuthStatus];
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]) {
-        self.loginButton.title = @"Logout";
+        self.loginButton.textLabel.text = @"Logout";
         self.loggedIn = TRUE;
     } else {
-        self.loginButton.title = @"Login";
+        self.loginButton.textLabel.text = @"Login";
         self.loggedIn = FALSE;
         
     }
+    
+    self.addButton.enabled = FALSE;
+    self.addButton.image = nil;
+    
+    //MyRepo
+    self.myRepoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"myGithubReposWebViewController"];
+    [self addChildViewController:self.myRepoViewController];
+    self.myRepoViewController.view.frame = self.view.frame;
+    [self.view addSubview:self.myRepoViewController.view];
+    [self.myRepoViewController didMoveToParentViewController:self];
+    
+    self.topViewController = self.myRepoViewController;
         
     //Repo Search controller declaration
     self.repoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubReposWebViewController"];
     [self addChildViewController:self.repoViewController];
     self.repoViewController.view.frame = self.view.frame;
-
-    [self.view addSubview:self.repoViewController.view];
     [self.repoViewController didMoveToParentViewController:self];
     
-    self.topViewController = self.repoViewController;
     [self setupPanGesture];
     
     //User Search controller declaration
@@ -178,7 +190,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 2;
+    return 4;
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -243,6 +255,15 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
+        self.myRepoViewController.view.frame = self.topViewController.view.frame;
+        [self.topViewController.view removeFromSuperview];
+        self.topViewController = self.myRepoViewController;
+        [self.view addSubview:self.myRepoViewController.view];
+        [self setupPanGesture];
+        self.isOpen = NO;
+        [self closeMenu];
+    }
+    if (indexPath.row == 1) {
         self.repoViewController.view.frame = self.topViewController.view.frame;
         [self.topViewController.view removeFromSuperview];
         self.topViewController = self.repoViewController;
@@ -251,15 +272,29 @@
         self.isOpen = NO;
         [self closeMenu];
     }
-    if (indexPath.row == 1) {
+    if (indexPath.row == 2) {
         self.userViewController.view.frame = self.topViewController.view.frame;
-        NSLog(@"%f", self.userViewController.view.frame.size.height);
         [self.topViewController.view removeFromSuperview];
         self.topViewController = self.userViewController;
         [self.view addSubview:self.userViewController.view];
         [self setupPanGesture];
         self.isOpen = NO;
         [self closeMenu];
+    }
+    
+    if (indexPath.row == 3) {
+        if (self.loggedIn) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"accessToken"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            self.loginButton.textLabel.text = @"Login";
+            self.loggedIn = FALSE;
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        } else {
+            self.loginButton.textLabel.text = @"Logout";
+            [self.networkController performSelector:@selector(beginOAuthAccess) withObject:nil afterDelay:.1];
+            self.loggedIn = TRUE;
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        }
     }
     
     [self.tableView resignFirstResponder];
@@ -276,15 +311,6 @@
     }
 }
 - (IBAction)loginAction:(id)sender {
-    if (self.loggedIn) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"accessToken"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        self.loginButton.title = @"Login";
-        self.loggedIn = FALSE;
-    } else {
-        [self.networkController performSelector:@selector(beginOAuthAccess) withObject:nil afterDelay:.1];
-        self.loginButton.title = @"Logout";
-        self.loggedIn = TRUE;
-    }
+    
 }
 @end
