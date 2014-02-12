@@ -64,8 +64,16 @@
                                 <action selector="sideBarButton:" destination="WWP-If-vff" id="b5m-o5-lP3"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Login" id="bm7-Oh-dMA">
+                            <connections>
+                                <action selector="loginAction:" destination="WWP-If-vff" id="vb0-8d-kHu"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="loginButton" destination="bm7-Oh-dMA" id="Ewd-W4-Bo9"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S2x-3j-hl0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

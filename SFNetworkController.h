@@ -10,10 +10,15 @@
 
 @interface SFNetworkController : NSObject
 
+@property (strong, nonatomic) NSString *accessToken;
+
 + (SFNetworkController *)sharedController;
 
 - (NSArray *)reposForSearchString:(NSString *)searchString;
 - (NSArray *)usersForSearchString:(NSString *)searchString;
+- (void)beginOAuthAccess;
+- (BOOL)checkOAuthStatus;
+- (void)handleCallbackURL:(NSURL *)url;
 
 
 @end

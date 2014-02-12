@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SFDetailViewController.h"
+#import "SFNetworkController.h"
 #import "SFAppDelegate.h"
 #import "Repo.h"
 
@@ -16,5 +17,7 @@
 @property (strong, nonatomic) SFDetailViewController *detailViewController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (weak, nonatomic) SFAppDelegate *appDelegate;
+@property (strong, nonatomic) SFNetworkController *networkController;
 
 @end

@@ -31,8 +31,12 @@
 {
     [super viewDidLoad];
     
+    //self.appDelegate = (SFAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    
     SFAppDelegate *appDelegate = (SFAppDelegate *)[[UIApplication sharedApplication] delegate];
     self.managedObjectContext = appDelegate.managedObjectContext;
+    self.networkController = self.appDelegate.controller;
     
     self.githubSearchBar.delegate = self;
     
@@ -160,6 +164,8 @@
    [searchBar resignFirstResponder];
     [self githubSearch:searchBar.text];
 }
+
+#pragma mark - Checking to see if repo already exists
 
 - (void)findExistingRepos:(NSDictionary *)dictionary withExistingID:(NSString *)repoID
 {

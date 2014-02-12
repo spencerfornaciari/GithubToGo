@@ -9,12 +9,15 @@
 #import "SFMasterViewController.h"
 #import "SFReposTableViewController.h"
 #import "SFUserCollectionController.h"
+#import "SFNetworkController.h"
 
 @interface SFMasterViewController ()
 
 @property (nonatomic) SFReposTableViewController *repoViewController;
 @property (nonatomic) SFUserCollectionController *userViewController;
 @property (nonatomic) UIViewController *topViewController;
+@property (weak, nonatomic) SFAppDelegate *appDelegate;
+@property (strong, nonatomic) SFNetworkController *networkController;
 
 @property (nonatomic) BOOL isOpen;
 
@@ -37,7 +40,22 @@
 {
     [super viewDidLoad];
     
+    //if ([NSString])
+    
     self.isOpen = NO;
+    self.appDelegate = (SFAppDelegate *)[UIApplication sharedApplication].delegate;
+    self.networkController = self.appDelegate.controller;
+    
+    //[self.networkController checkOAuthStatus];
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]) {
+        self.loginButton.title = @"Logout";
+        self.loggedIn = TRUE;
+    } else {
+        self.loginButton.title = @"Login";
+        self.loggedIn = FALSE;
+        
+    }
         
     //Repo Search controller declaration
     self.repoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"githubReposWebViewController"];
@@ -255,6 +273,18 @@
     } else {
         [self closeMenu];
         self.isOpen = NO;
+    }
+}
+- (IBAction)loginAction:(id)sender {
+    if (self.loggedIn) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"accessToken"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        self.loginButton.title = @"Login";
+        self.loggedIn = FALSE;
+    } else {
+        [self.networkController performSelector:@selector(beginOAuthAccess) withObject:nil afterDelay:.1];
+        self.loginButton.title = @"Logout";
+        self.loggedIn = TRUE;
     }
 }
 @end
