@@ -31,7 +31,9 @@
     self.networkController = [SFNetworkController new];
     
     self.repoArray = [NSMutableArray new];
-    self.repoArray = [[self.networkController fetchUsersReposWithAccessToken:[[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]] mutableCopy];
+    
+   
+    
     NSLog(@"%@", self.repoArray);
     //NSLog(@"%@", self.repoArray);
 
@@ -40,6 +42,17 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    BOOL token = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
+    if (token) {
+        self.repoArray = [[self.networkController fetchUsersReposWithAccessToken:[[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]] mutableCopy];
+    } else {
+        [self.repoArray removeAllObjects];
+    }
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning

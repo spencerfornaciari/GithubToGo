@@ -51,17 +51,19 @@
     
     //[self.networkController checkOAuthStatus];
     
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]) {
+    NSLog(@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]);
+    
+    self.loggedIn = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
+    
+    if (self.loggedIn) {
         self.loginButton.textLabel.text = @"Logout";
-        self.loggedIn = TRUE;
     } else {
         self.loginButton.textLabel.text = @"Login";
-        self.loggedIn = FALSE;
         
     }
     
-    self.addButton.enabled = FALSE;
-    self.addButton.image = nil;
+//    self.addButton.enabled = FALSE;
+//    self.addButton.image = nil;
     
     //MyRepo
     self.myRepoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"myGithubReposWebViewController"];
@@ -284,7 +286,7 @@
     
     if (indexPath.row == 3) {
         if (self.loggedIn) {
-            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"accessToken"];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"accessToken"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             self.loginButton.textLabel.text = @"Login";
             self.loggedIn = FALSE;
