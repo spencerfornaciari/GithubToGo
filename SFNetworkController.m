@@ -141,7 +141,10 @@
 -(void)createRepo:(NSString *)repoName withDescription:(NSString *)repoDescription
 {
     NSError *JSONError;
-    NSDictionary *newRepo = @{repoName: repoDescription};
+    NSString *repoName1 = @"MyName";
+    NSString *repoDescription1 = @"MyDescription";
+    NSDictionary *newRepo = @{@"name": repoName,
+                              @"description": repoDescription};
     
     NSData *postData = [NSJSONSerialization dataWithJSONObject:newRepo options:NSJSONWritingPrettyPrinted error:&JSONError];
     
@@ -160,7 +163,7 @@
     NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     NSString *stringResponse = [[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding];
     
-    //NSLog(@"%@", stringResponse);
+    NSLog(@"%@", stringResponse);
 }
 
 @end

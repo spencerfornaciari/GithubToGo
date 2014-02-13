@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SFNetworkController.h"
 
-@interface SFAddRepoViewController : UIViewController
+@interface SFAddRepoViewController : UIViewController <UITextFieldDelegate>
 
 @end

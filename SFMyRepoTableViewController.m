@@ -32,7 +32,7 @@
     
     self.repoArray = [NSMutableArray new];
     
-    [self.networkController createRepo:@"newRepo" withDescription:@"repoDescription"];
+    //[self.networkController createRepo:@"newRepo" withDescription:@"repoDescription"];
     
     //NSLog(@"%@", self.repoArray);
     //NSLog(@"%@", self.repoArray);

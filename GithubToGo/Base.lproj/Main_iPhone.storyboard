@@ -147,45 +147,6 @@
             </objects>
             <point key="canvasLocation" x="321" y="88"/>
         </scene>
-        <!--My Repo View Controller-->
-        <scene sceneID="N2s-hK-qsA">
-            <objects>
-                <viewController storyboardIdentifier="myGithubReposWebViewController" id="Y1n-lI-oic" customClass="SFMyRepoViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="yrO-w5-8FW">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" id="zFn-1t-IFR" userLabel="Container View">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
-                                <subviews>
-                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="N8a-JI-FjI">
-                                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                        <items>
-                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="SKC-ie-06k"/>
-                                            <barButtonItem title="Add Repo" id="M9p-5G-zR4"/>
-                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="uOx-u0-bWl"/>
-                                        </items>
-                                    </toolbar>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="oPS-qm-Ara">
-                                        <rect key="frame" x="0.0" y="638" width="320" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="g6a-mG-fVa" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="791" y="79"/>
-        </scene>
         <!--Repos Table View Controller - Master-->
         <scene sceneID="VgW-fR-Quf">
             <objects>
@@ -262,28 +223,79 @@
             </objects>
             <point key="canvasLocation" x="1784" y="-650"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Repo View Controller-->
         <scene sceneID="sJJ-4i-Faq">
             <objects>
-                <viewController id="pgB-fa-oSP" sceneMemberID="viewController">
+                <viewController id="pgB-fa-oSP" customClass="SFAddRepoViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RfC-8M-AuP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="078-Fc-1fO">
-                                <rect key="frame" x="74" y="224" width="155" height="30"/>
+                                <rect key="frame" x="85" y="199" width="155" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Create Repo">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="createRepoAction:" destination="pgB-fa-oSP" eventType="touchUpInside" id="fN4-kO-pDV"/>
+                                </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="unh-md-ANw">
+                                <rect key="frame" x="85" y="199" width="155" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelButton:" destination="pgB-fa-oSP" eventType="touchUpInside" id="erV-hn-9SV"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Repo Name (Required)" textAlignment="center" minimumFontSize="17" id="9da-6o-eto">
+                                <rect key="frame" x="20" y="75" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="repoNameAction:" destination="pgB-fa-oSP" eventType="editingDidEnd" id="DiG-HW-j9p"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Repo Description (Optional)" textAlignment="center" minimumFontSize="17" id="O6Q-kZ-NJm">
+                                <rect key="frame" x="20" y="142" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="repoDescriptionAction:" destination="pgB-fa-oSP" eventType="editingDidEnd" id="qD5-9O-jQp"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repo Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="blp-xX-td2">
+                                <rect key="frame" x="101" y="46" width="96" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repo Description:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qNk-fN-abP">
+                                <rect key="frame" x="93" y="113" width="138" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="unh-md-ANw" id="2Vn-nb-D5g"/>
+                        <outlet property="createRepoButton" destination="078-Fc-1fO" id="smk-L9-IEs"/>
+                        <outlet property="repoDescriptionTextfield" destination="O6Q-kZ-NJm" id="9Sg-V0-Gno"/>
+                        <outlet property="repoNameTextField" destination="9da-6o-eto" id="hV0-Ox-eEi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5se-h6-umO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="809" y="-1351"/>
+            <point key="canvasLocation" x="771" y="-1343"/>
         </scene>
         <!--User Collection Controller-->
         <scene sceneID="jsY-kl-MCK">
