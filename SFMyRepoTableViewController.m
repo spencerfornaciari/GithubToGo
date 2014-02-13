@@ -32,9 +32,9 @@
     
     self.repoArray = [NSMutableArray new];
     
-   
+    [self.networkController createRepo:@"newRepo" withDescription:@"repoDescription"];
     
-    NSLog(@"%@", self.repoArray);
+    //NSLog(@"%@", self.repoArray);
     //NSLog(@"%@", self.repoArray);
 
     // Uncomment the following line to preserve selection between presentations.

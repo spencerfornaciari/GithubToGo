@@ -20,5 +20,7 @@
 - (BOOL)checkOAuthStatus;
 - (void)handleCallbackURL:(NSURL *)url;
 - (NSArray *)fetchUsersReposWithAccessToken:(NSString *)token;
+-(void)createRepo:(NSString *)repoName withDescription:(NSString *)repoDescription;
+
 
 @end

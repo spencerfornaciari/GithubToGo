@@ -102,9 +102,6 @@
     NSError *error;
     
     NSArray *repoArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-
-    //NSMutableDictionary *repoDictionary
-    NSLog(@"%@",repoArray);
     
     return repoArray;
 
@@ -143,14 +140,27 @@
 
 -(void)createRepo:(NSString *)repoName withDescription:(NSString *)repoDescription
 {
-//    repoName = [repoName]
-//    
-//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-//    [request setURL:[NSURL URLWithString:@"https://api.github.com/user/repos/%@", repoName]];
-//    [request setHTTPMethod:@"POST"];
-//    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-//    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-//    [request setHTTPBody:postData];
+    NSError *JSONError;
+    NSDictionary *newRepo = @{repoName: repoDescription};
+    
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:newRepo options:NSJSONWritingPrettyPrinted error:&JSONError];
+    
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/user/repos?access_token=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]]]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
+    NSURLResponse *response;
+    NSError *error;
+    
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    NSString *stringResponse = [[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding];
+    
+    //NSLog(@"%@", stringResponse);
 }
 
 @end
