@@ -49,23 +49,26 @@
     self.appDelegate = (SFAppDelegate *)[UIApplication sharedApplication].delegate;
     self.networkController = self.appDelegate.controller;
     
-    //[self.networkController checkOAuthStatus];
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Repo" message:@"Enter the name of your new repo" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
+//    
+//    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+//    [alert show];
+    
+   
     
     NSLog(@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]);
     
-    self.loggedIn = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
+    self.loggedIn = (BOOL)[[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
     
     if (self.loggedIn) {
         self.loginButton.textLabel.text = @"Logout";
+        self.addButton.enabled = TRUE;
     } else {
         self.loginButton.textLabel.text = @"Login";
-        
+        self.addButton.enabled = FALSE;
     }
     
-//    self.addButton.enabled = FALSE;
-//    self.addButton.image = nil;
-    
-    //MyRepo
+    //MyRepo declaration
     self.myRepoViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"myGithubReposWebViewController"];
     [self addChildViewController:self.myRepoViewController];
     self.myRepoViewController.view.frame = self.view.frame;
@@ -93,6 +96,16 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+//Use for create repos
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        UITextField *textField = [alertView textFieldAtIndex:0];
+        NSLog(@"%@", textField.text);
+        [self.networkController createRepo:textField.text withDescription:@"None"];
+    }
 }
 
 -(void)setupPanGesture

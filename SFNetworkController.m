@@ -141,8 +141,7 @@
 -(void)createRepo:(NSString *)repoName withDescription:(NSString *)repoDescription
 {
     NSError *JSONError;
-    NSString *repoName1 = @"MyName";
-    NSString *repoDescription1 = @"MyDescription";
+
     NSDictionary *newRepo = @{@"name": repoName,
                               @"description": repoDescription};
     
@@ -151,8 +150,10 @@
     NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/user/repos?access_token=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]]]];
+    //[request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/user/repos?access_token=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]]]];
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/user/repos"]]];
     [request setHTTPMethod:@"POST"];
+    [request setValue:[NSString stringWithFormat:@"Token %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]]  forHTTPHeaderField:@"Authorization"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:postData];

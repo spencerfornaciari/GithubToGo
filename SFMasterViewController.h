@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SFDetailViewController.h"
 
-@interface SFMasterViewController : UITableViewController <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate>
+@interface SFMasterViewController : UITableViewController <UIGestureRecognizerDelegate, NSFetchedResultsControllerDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) SFDetailViewController *detailViewController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
