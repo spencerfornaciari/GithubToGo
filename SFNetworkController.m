@@ -85,6 +85,8 @@
     self.accessToken = [self convertResponseIntoToken:responseData];
     NSLog(@"%@", self.accessToken);
     
+    [self fetchUsersReposWithAccessToken:self.accessToken];
+    
     [[NSUserDefaults standardUserDefaults] setObject:self.accessToken forKey:@"accessToken"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
@@ -165,6 +167,80 @@
     NSString *stringResponse = [[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding];
     
     NSLog(@"%@", stringResponse);
+}
+
+-(NSArray *)fetchUsersRepoContents:(NSString *)repoName;
+{
+    NSString *stringURL = [NSString stringWithFormat:@"https://api.github.com/repos/%@/%@/contents?access_token=%@", @"spencerfornaciari", repoName, [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]];
+    
+    NSURL *myURL = [NSURL URLWithString:stringURL];
+    NSData *responseData = [NSData dataWithContentsOfURL:myURL];
+    
+    NSLog(@"%@", myURL);
+    
+    NSError *error;
+    
+    NSArray *repoArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+    
+    return repoArray;
+    
+}
+
+-(NSArray *)fetchUsersRepoContentsOfFolder:(NSString *)repoFolderName forRepo:(NSString *)repoName;
+{
+    NSString *stringURL = [NSString stringWithFormat:@"https://api.github.com/repos/%@/%@/contents/%@?access_token=%@", @"spencerfornaciari", repoName, repoFolderName, [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]];
+    
+    NSURL *myURL = [NSURL URLWithString:stringURL];
+    NSData *responseData = [NSData dataWithContentsOfURL:myURL];
+    
+    NSLog(@"%@", myURL);
+    
+    NSError *error;
+    
+    NSArray *repoArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+    
+    return repoArray;
+    
+}
+
+-(void)createFileInRepo:(NSString *)repoName forUser:(NSString *)userName withFileName:(NSString *)fileName withContent:(NSString *)fileContent
+{
+    NSData *newData = [@"iOS Developer Tips encoded in Base64" dataUsingEncoding:NSUTF8StringEncoding];
+    
+    // Get NSString from NSData object in Base64
+    NSString *encodedString = [newData base64EncodedStringWithOptions:0];
+    
+    NSError *JSONError;
+    
+    NSDictionary *newRepo = @{@"message": @"New File",
+                              @"content": encodedString};
+    
+    NSString *name = @"spencerfornaciari";
+    NSString *pathName = @"Path4";
+    
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:newRepo options:NSJSONWritingPrettyPrinted error:&JSONError];
+    
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    
+    NSLog(@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]);
+    ///repos/:owner/:repo/contents/:path
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/%@/contents/%@", name, repoName, pathName]]];
+    [request setHTTPMethod:@"PUT"];
+    [request setValue:[NSString stringWithFormat:@"Token %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]]  forHTTPHeaderField:@"Authorization"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
+    NSURLResponse *response;
+    NSError *error;
+    
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    NSString *stringResponse = [[NSString alloc] initWithData:responseData encoding:NSASCIIStringEncoding];
+    
+    NSLog(@"%@", stringResponse);
+    
 }
 
 @end

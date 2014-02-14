@@ -45,16 +45,25 @@
     
     //if ([NSString])
     
+    self.addButton = nil;
+    
     self.isOpen = NO;
     self.appDelegate = (SFAppDelegate *)[UIApplication sharedApplication].delegate;
     self.networkController = self.appDelegate.controller;
+    NSString *fileName = @"MyNewFile";
+    
+    //fileName = [fileName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *content = @"spencerfornaciari owns this application. Transfer ownership.";
+    
+    [self.networkController createFileInRepo:@"Test-Repo" forUser:@"spencerfonaciari" withFileName:fileName withContent:content];
     
 //    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Repo" message:@"Enter the name of your new repo" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
 //    
 //    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
 //    [alert show];
     
-   
+//    NSArray *repoArray = [self.networkController fetchUsersReposWithAccessToken:@"FilmHeat"];
+//    NSLog(@"%@", repoArray);
     
     NSLog(@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]);
     
@@ -307,6 +316,7 @@
         } else {
             self.loginButton.textLabel.text = @"Logout";
             [self.networkController performSelector:@selector(beginOAuthAccess) withObject:nil afterDelay:.1];
+            [self.myRepoViewController.tableView reloadData];
             self.loggedIn = TRUE;
             [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         }

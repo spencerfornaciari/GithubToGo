@@ -46,7 +46,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    BOOL token = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
+    BOOL token = (BOOL)[[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
     if (token) {
         self.repoArray = [[self.networkController fetchUsersReposWithAccessToken:[[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]] mutableCopy];
     } else {

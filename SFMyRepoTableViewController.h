@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SFNetworkController.h"
 
-@interface SFMyRepoTableViewController : UITableViewController
+@interface SFMyRepoTableViewController : UITableViewController <SFNetworkControllerDelegate>
 
 @property (strong, nonatomic) SFNetworkController *networkController;
 
