@@ -50,12 +50,14 @@
     self.isOpen = NO;
     self.appDelegate = (SFAppDelegate *)[UIApplication sharedApplication].delegate;
     self.networkController = self.appDelegate.controller;
-    NSString *fileName = @"MyNewFile";
+    NSString *fileName = @"MyNewFile2";
+    NSString *userName = @"spencerfornaciari";
+    NSString *pathName = @"Test-Repo";
     
     //fileName = [fileName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *content = @"spencerfornaciari owns this application. Transfer ownership.";
     
-    [self.networkController createFileInRepo:@"Test-Repo" forUser:@"spencerfonaciari" withFileName:fileName withContent:content];
+    [self.networkController createFileInRepo:pathName forUser:userName withFileName:fileName withContent:content];
     
 //    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Repo" message:@"Enter the name of your new repo" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Confirm", nil];
 //    
